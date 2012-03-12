@@ -1,17 +1,31 @@
 <?php
+/**
+ * This script will fetch the current final graes for all students in a specific course. 
+ * In order for this to work, you need to be either a teacher in the course or an account 
+ * admin.  Please take a moment to customize the variables in the top part of this script 
+ * to fit your situation.  Specifically, adjust BASE_URL, ACCESS_TOKEN, and $course_id.
+ *
+ **/
 
-$domain='cwt'; // Set this to your domain, i.e. cwt.instructure.com
-$BASE_URL = "https://%s.instructure.com/api/v1%s";
+// Variables you should adjust
+define('BASE_URL',"https://<subdomain>.instructure.com/api/v1%s"); # Set this to your account's sub-domain or url.  This is the 
+                                                                     # url you use to access canvas.  
+                                                                     # The %s part is used to plug in the endpoints 
+                                                                     # later in the script.
 
-$course_id = 242844;  # not the sis_id but the canvas internal id
+define('ACCESS_TOKEN', "<your_access_token>"); # Replace this with your user's access token
 
-$request_headers = array('Authorization: Bearer '.$access_token);
+$course_id = <course_id>;  # not the sis_id but the canvas internal id
+
+// End of settings that would be changed
+
+$request_headers = array('Authorization: Bearer ' . ACCESS_TOKEN);
 
 
 # First, get the list of students in the course
 #
 # Build the API endpoint for fetching the list of students
-$students_endpoint = sprintf($BASE_URL,$domain,sprintf('/courses/%d/students', $course_id));
+$students_endpoint = sprintf(BASE_URL,sprintf('/courses/%d/students', $course_id));
 
 # Initiate cURL, adding the REQUEST_HEADERS to it for authentication
 $ch = curl_init();
@@ -44,7 +58,7 @@ if(!$student_list){
   $submission_params_string = implode('&',$submission_params);
 
   # Build a request url 
-  $submissions_endpoint = sprintf($BASE_URL,$domain,sprintf('/courses/%d/students/submissions', $course_id));
+  $submissions_endpoint = sprintf(BASE_URL,sprintf('/courses/%d/students/submissions', $course_id));
   # add the query parameters to the url, and set the curl url destination
   curl_setopt($ch, CURLOPT_URL, $submissions_endpoint . '?' . $submission_params_string);
 
@@ -64,3 +78,6 @@ if(!$student_list){
 
 # Please close the curl handler
 curl_close($ch);
+
+// Do something with the $grades array, which now contains the grades
+var_dump($grades);
