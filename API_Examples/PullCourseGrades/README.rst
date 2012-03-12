@@ -5,14 +5,14 @@ To get the final grade (points and percentage) for the students in a course via 
 you need to do two requests.
 
 Step one, fetch the list of students in a course.  Replace everything inside < > with the
-corresponding value for your account.
+corresponding value for your account.::
 
-.. code-block:: bash
 
   curl https://<subdomain>.instructure.com/api/v1/courses/<course_id>/students.json?access_token=<access_token>
 
-The response will look something like this:
-.. code-block:: javascript
+The response will look something like this:::
+
+
   [{
       "name": "Sam Hansen",
       "sortable_name": "Hansen, Sam",
@@ -35,15 +35,11 @@ above, that list would be ``92349``,``4234986``.
 Using that list, request the student submissions for the course including their final
 score and percentage for the course.  For every student_id, add a student_ids[] parameter
 to the request. Yes, it is a little cumbersome but it is the best way to do it at this
-point.
-
-.. code-block:: bash
+point.::
 
   curl https://<subdomain>.instructure.com/api/v1/courses/<course_id>/students/submissions?student_ids[]=92349&&student_ids[]=4234986&grouped=1&include[]=total_scores
 
-The response should look something like this:
-
-.. code-block:: javascript
+The response should look something like this:::
 
   [
      {
@@ -84,4 +80,4 @@ The response should look something like this:
 
 
 
-Last edited:  Fri Mar  9 15:17:30 MST 2012
+Last edited:  Mon Mar 12 11:00:04 MDT 2012
