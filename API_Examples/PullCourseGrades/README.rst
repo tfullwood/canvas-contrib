@@ -1,6 +1,13 @@
 Fetch Current Final Grades 
 ===========================
 
+[update Mon Mar 12 11:07:28 MDT 2012] I have now included some example scripts in php and
+python that do what I describe here.
+
+* PHP example -- ``pull_grades.php``
+* Python example -- ``pull_grades.py``
+
+
 To get the final grade (points and percentage) for the students in a course via the api,
 you need to do two requests.
 
