@@ -3,7 +3,6 @@
 $domain='cwt'; // Set this to your domain, i.e. cwt.instructure.com
 $BASE_URL = "https://%s.instructure.com/api/v1%s";
 
-$access_token = "h3xyPlREWirj4FDjJTzlpAWPakHgVzCx0nJlwYA4XcX2tvqa6j6YEBo7AoOfvSQW";
 $course_id = 242844;  # not the sis_id but the canvas internal id
 
 $request_headers = array('Authorization: Bearer '.$access_token);
