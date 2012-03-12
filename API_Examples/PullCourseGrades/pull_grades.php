@@ -63,6 +63,5 @@ if(!$student_list){
   }
 }
 
-#print_r($grades);
-# You have to close the curl handler
+# Please close the curl handler
 curl_close($ch);
