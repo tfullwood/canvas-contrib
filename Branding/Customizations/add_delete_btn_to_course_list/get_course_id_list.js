@@ -1,40 +1,30 @@
 
-function getCourseList1(){
-  var ll = $("div.course>div.info>span.links>a:contains('Settings')");
-
-  var cid_list = new Array();
-
-  var ro = /\/courses\/(\d*)\/settings/;
-
-  for(var x=0;x<ll.length; x++){
-    var l1 = ll[x];
-    var res = ro.exec(l1.attributes.href.value);
-    console.log(res);
-    if(res!==null){
-      cid_list.push(res[1]);
-    }
-  }
-}
-
+// A regex to recognize a string with numbers only
 var ro = /^(\d+)$/;
-function getCourseList(){
-  var ll = $("li.course[id]");
-  var cid_list = new Array();
-  for(var x=0;x<ll.length; x++){
-    var _id = ll[x].id.replace('course_','');
-    var res = ro.exec(_id);
-    /*
-    console.log(ll[x].id);
-    console.log(res);
-    */
-    if(res){
-      cid_list.push(res[1]);
-    }
-  }
 
-  return cid_list;
+/*
+ * This function figures out the course id of the DOM element passed to it.
+ *
+ * @param li_obj a list item <item> identified by a previous jquery selector
+ * @return the id or null
+ *
+ */
+function getCourseId(li_obj){
+  var _id = li_obj.id.replace('course_','');
+  var res = ro.exec(_id);
+  if(res){
+    return res[1];
+  }else{
+    return null;
+  }
 }
+
+// a template for the delete course link
 var del_link = " | <a href='/courses/{{cid}}/confirm_action?event=delete'>Delete</a>";
+
+// This is the function you would call to add the delete function to the page.  I wouldn't
+// add this function to all courses, but call it using chrome's developer tools or firebug
+// in Firefox.
 function addCourseDeleteBtn(){
   var ll = $("li.course[id]");
   for(var l=0;l<ll.length; l++){
@@ -50,12 +40,3 @@ function addCourseDeleteBtn(){
   }
 }
 
-function getCourseId(li_obj){
-  var _id = li_obj.id.replace('course_','');
-  var res = ro.exec(_id);
-  if(res){
-    return res[1];
-  }else{
-    return null;
-  }
-}

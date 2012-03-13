@@ -7,6 +7,10 @@ javascript will add 'delete' to this list.  When learning canvas, and specifical
 working in a sandbox environment, it can be useful to be able to quickly delete a course
 without having to visit the course homepage or the settings page.  
 
+NOTE: If you use this script, it is imperative that you understand that it depends on the
+page structure (i.e. the DOM) looking a certain way. This structure will likely change in
+the future and the script will stop working when it does.
+
 Support
 ======
 
