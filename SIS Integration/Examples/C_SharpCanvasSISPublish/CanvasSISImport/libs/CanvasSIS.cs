@@ -10,9 +10,9 @@ namespace canvasSIS
 {
 	public class CanvasSIS
 	{
-		static private string account_id = "2314";
+		static private string account_id = "234";
 		static private string sub_domain = "canvas";
-		static private string access_token = "lkJOIJ2OIJASDFASldkjf";
+		static private string access_token = "h3xyPlBo7AoOfvSQW";
 		public CanvasSIS ()
 		{
 			

@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CanvasSISImport/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CanvasSISImport/libs/CanvasSIS.cs">
     <Files>
       <File FileName="CanvasSISImport/Program.cs" Line="39" Column="4" />
+      <File FileName="CanvasSISImport/libs/CanvasSIS.cs" Line="13" Column="44" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
