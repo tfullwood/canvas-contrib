@@ -1,5 +1,19 @@
 /*
- * Create a link in a quiz question pointing to https://personalleadership.instructure.com/courses/9/quizzes/6/take?preview=1
+Support
+======
+
+This is an unsupported, community-created project. Keep that in 
+mind. Instructure won't be able to help you fix or debug this.
+That said, the community will hopefully help support and keep
+both the script and this documentation up-to-date.
+
+Good luck!
+ * 
+ */
+
+/*
+ * Create a link in a quiz question pointing to a link like this:
+ *    https://personalleadership.instructure.com/courses/9/quizzes/6/take?preview=1
  *
  */
 
