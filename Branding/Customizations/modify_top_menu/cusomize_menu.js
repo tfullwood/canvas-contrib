@@ -11,7 +11,7 @@
  **/
 $(document).ready(function(){
   // Identify the logout link in the top menu
-  var logout_button = $('#identity_feedback'); 
+  var logout_button = $('#identity-help-container'); 
   // Create the support button html string
   var support_button = "<li><a href='https://support.myschool.edu'>Local Support</a></li>";
   $(support_button).insertBefore($(logout_button));
