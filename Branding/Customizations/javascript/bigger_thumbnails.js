@@ -1,3 +1,9 @@
+/*
+ * This script will resize the thumbnails used for Youtube and Kaltura
+ *
+ * It appears to work well but use at your own risk.
+ */
+
 var img_list = $('img.media_comment_thumbnail');
 for(var x=0;x<img_list.length;x++){
   var url = $(img_list[x]).css('background-image');
@@ -13,4 +19,3 @@ for(var x=0;x<img_list.length;x++){
   }
   $(img_list[x]).width('480px').height('360px')
 }
-
