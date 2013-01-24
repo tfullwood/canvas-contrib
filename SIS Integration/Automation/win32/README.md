@@ -124,8 +124,6 @@ parameters:
 
     SET TOKEN=''
     SET ACCOUNT=''
-    SET USERNAME=''
-    SET PASSWORD=''
     SET CANVAS_URL='https://canvas.instructure.com'
     SET EXPORT_DIRECTORY='C:\canvas-sis'
 
@@ -141,8 +139,6 @@ The configured script will end up looking something like this:
 
     SET TOKEN='adsfl234lk2lsnsdf...'
     SET ACCOUNT='12345'
-    SET USERNAME='tom@instructure.com'
-    SET PASSWORD='password'
     SET CANVAS_URL='https://institution.instructure.com'
     SET EXPORT_DIRECTORY='C:\canvas-sis'
 

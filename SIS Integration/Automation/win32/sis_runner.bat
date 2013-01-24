@@ -14,8 +14,6 @@ SETLOCAL
 
 SET TOKEN=
 SET ACCOUNT=
-SET USERNAME=
-SET PASSWORD=
 SET CANVAS_URL=https://canvas.instructure.com
 SET EXPORT_DIRECTORY=C:\canvas-sis
 
@@ -28,14 +26,16 @@ IF NOT DEFINED TOKEN (
 )
 
 REM - Look for the zip file we'll upload
+REM - This will send the first ZIP it finds
 FOR /f "delims=" %%a IN ('DIR /B %EXPORT_DIRECTORY%\*.zip') DO @SET ZIP_FILE=%EXPORT_DIRECTORY%\%%a 
 IF NOT DEFINED ZIP_FILE (
     @ECHO Unable to find a zip file in %EXPORT_DIRECTORY%! Exiting...
     GOTO:EOF
 )
 
-SET URL=%CANVAS_URL%/api/v1/accounts/%ACCOUNT%/sis_imports.json?access_token=%TOKEN%
-%CURL% -H "Content-Type: application/zip" --data-binary @%ZIP_FILE% -u "%USERNAME%:%PASSWORD%" %URL%^&import_type=instructure_csv
+SET URL=%CANVAS_URL%/api/v1/accounts/%ACCOUNT%/sis_imports.json?
+%CURL% -H "Content-Type: application/zip" -H "Authorization: Bearer %TOKEN%" --data-binary @%ZIP_FILE% %URL%^&import_type=instructure_csv
 DEL %ZIP_FILE%
+REM - Rather than delete, it would be better to move the file elsewhere
 
 ENDLOCAL
