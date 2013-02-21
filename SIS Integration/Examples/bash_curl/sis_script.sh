@@ -22,7 +22,7 @@ fi
 while getopts e:h: opt
 do
   case "$opt" in
-    e) domain=$domain.$OPTARG;;
+    e) if [ $OPTARG != "production" ]; then domain=$domain.$OPTARG; fi;;
     h) usage;;
   esac
 done

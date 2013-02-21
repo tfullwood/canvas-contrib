@@ -25,6 +25,15 @@ Installation steps:
     * change the domain variables
   * make the script executable
     * chmod +x sis_script.sh
+
+
+Usage
+=====
+
+Create a crontab job to run regularly.  For example, to run this script hourly, you could
+create a job like the following:
+
+0 * * * * /path/to/sis_script.sh -e 
   
 
 
