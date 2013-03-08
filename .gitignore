@@ -1,3 +1,4 @@
 SIS Integration/Examples/C_SharpCanvasSISPublish/CanvasSISImport/bin/Debug/CanvasSISPublish.exe
 SIS Integration/Examples/C_SharpCanvasSISPublish/CanvasSISImport/bin/Debug/CanvasSISPublish.exe.mdb
 *.swp
+*.pyc
