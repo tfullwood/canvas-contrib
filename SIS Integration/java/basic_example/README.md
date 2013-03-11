@@ -1,5 +1,5 @@
 This project is a simple JAVA client for submitting SIS files to the Canvas API.  The file
-src/com.coolwebteacher/CanvasAPIPost.java is an example of how this library might be
+src/com/kajigga/CanvasAPIPost.java is an example of how this library might be
 used.
 
 There are some requirements to making this all work.  These include the
