@@ -10,7 +10,7 @@ import csv, requests, time
 
 myCsvFile = '<MY_CSV_FILE>' # Example: 'API_Testing/users_provisioning.csv'
 myLogFile = '<MY_LOG_FILE>' # Example: '/Users/ianm/Documents/Schools/IMU/log.txt'
-baseUrl = '<MY_BASE_URL>' # Example: 'https://ian.test.instructure.com/api/v1/users/'
+baseUrl = '<MY_BASE_URL>' # Example: 'https://canvas.instructure.com/api/v1/users/'
 header = {'Authorization' : 'Bearer <MY_ACCESS_TOKEN>'}
 imagesUrl = '<MY_IMAGES_URL>' # Example: 'https://s3.amazonaws.com/canvas_ianm/avatars/'
 fileExt = '<FILE_EXTENSION>' # .png, .jpg, etc.
