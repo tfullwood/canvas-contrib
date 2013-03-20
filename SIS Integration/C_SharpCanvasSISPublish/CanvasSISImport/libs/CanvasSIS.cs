@@ -85,7 +85,7 @@ namespace canvasSIS
 		
 		public Hashtable CheckStatus(String sis_import_id)
 		{
-			//string url = @"https://" + sub_domain + ".instructure.com/api/v1/accounts/82726/sis_imports/"+sis_import_id +".json?access_token=h3xyPlREWirj4FDjJTzlpAWPakHgVzCx0nJlwYA4XcX2tvqa6j6YEBo7AoOfvSQW";
+			//string url = @"https://" + sub_domain + ".instructure.com/api/v1/accounts/82726/sis_imports/"+sis_import_id +".json?access_token=<access_token>";
             string url = @"https://" + sub_domain + ".instructure.com/api/v1/accounts/"+account_id+"/sis_imports/"+sis_import_id+".json?access_token="+access_token;
            	
            	NameValueCollection nvc = new NameValueCollection();
