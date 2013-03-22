@@ -9,9 +9,9 @@
 #>
 
 $token = "<access_token>" # access_token
-$workingPath = "c:\path\to\working\folder\"; # Important! Make sure this ends with a backslash
+$workingPath = "C:\path\to\working\folder\"; # Important! Make sure this ends with a backslash
 $CSVFileName = "csvfile.csv" # The name of the course copy CSV file.  Not the full path
-$domain = "<school>.instructure.com"
+$domain = "<schoolname_test>.instructure.com"
 $source_course_id_column = "source_id"
 $destination_course_id_column = "destination_id"
 
@@ -34,7 +34,7 @@ $CSVFilePath = $workingPath + $CSVFileName
 $archivePath = $workingPath + "archives\"
 $logPath = $workingPath + "logs\"
 $timestamp = get-date -format yyyy_MM_dd_HH
-$logFilePath = $logPath + "\" + $timestamp + ".log"
+$logFilePath = $logPath + $timestamp + ".log"
 $cacheFilePath = $logPath + "copy_cache.json"
 <# Create several paths that are needed for the script to run.
 These paths may exist already, but this is a check #>
@@ -73,6 +73,7 @@ Write-Host "Log File: " + $logFilePath
 $headers = @{"Authorization"="Bearer "+$token}
 $t = get-date -format yyyyMMddHHmmssfff
 if(!(Test-Path $CSVFilePath)){
+    Write-Host $CSVFilePath
 	Write-Host "There was no csv file.  I won't do anything"
     $output = "`r`n " + $t +":: There was no CSV file.  I won't do anything"
 	Add-Content -Path $logFilePath -Value $output
@@ -87,7 +88,7 @@ if(!(Test-Path $CSVFilePath)){
 	    $copyCache.Add("sources",@{$source_id=@()})
 	  }
 	  if($copyCache.sources.$source_id -lt 1){
-	    $copyCache.sources | Add-Member -MemberType NoteProperty -Name $source_id -Value New-Object System.Collections.ArrayList
+	    $copyCache.sources | Add-Member -MemberType NoteProperty -Name $source_id -Value New-Object #System.Collections.ArrayList
 	  }
 	  
 	  if(!($copyCache.sources.$source_id -contains $_.destination_id)){
@@ -109,7 +110,7 @@ if(!(Test-Path $CSVFilePath)){
 
 
 	$processed_path = $archivePath+$t+"."+$CSVFileName+".processed"
-    Move-Item $CSVFilePath $processed_path
+    #Move-Item $CSVFilePath $processed_path
 }
 
 

@@ -1,25 +1,55 @@
-$sourceDir = ".\" #this is source directory literal path
-$outputPath = ".\" #output path for the zip file creation
-$outputZip = ".\courses1.csv.zip" # name of the zip file
-$account_id = "82726"
-$url = "https://<your_domain>.instructure.com/api/v1/accounts/"+$account_id+"/sis_imports.json?import_type=instructure_csv"
-$token = "<access_token_here>" # access_token
+$sourceDir = "c:\some\path\to\CSV\source\" #this is source directory literal path
+$outputPath = "c:\some\path\to\script\output\folder\" #output path for the zip file creation
+$account_id = "<account_id>"
+$token = "<some_token>" # access_token
+$domain = "<school>.instructure.com"
+$account_id = "<account_id>"
+$outputZip = "courses1.csv.zip" # name of the zip file to create
+
+#################################################
+###### Don't edit anything after this line ######
+#################################################
+$url = "https://$domain/api/v1/accounts/"+$account_id+"/sis_imports.json?import_type=instructure_csv"
 $headers = @{"Authorization"="Bearer "+$token}
+
+# Just in case $sourceDir doesn't end with a \, add it.
+if(!($sourceDir.EndsWith('\'))){
+    $sourceDir += "\"
+    Write-Host "You sourceDir didn't end with a \ so I added one.  It really is important"
+}
+if($outputZip.Contains('\')){
+    Write-Host "The outputZip should not contain backslashes.  You are warned"
+}
+
+###### Some functions
 
 $contentType = "application/zip" # don't change
 $InFile = $outputPath+$outputZip # don't change
-$uri = $url 
-
-
-#write-zip -Path $sourceDir"*.csv" -OutputPath $outputPath$outputZip
+#write-zip -Path $sourceDir"*.csv" -OutputPath $InFile
 
 $t = get-date -format M_d_y_h
+$status_log_path = $outputPath+$t+"-status.log"
+#Write-Host "infile:"$InFile
+#Write-Host "contentType:"$contentType
+#$results = invoke-RestMethod -Headers $headers -InFile $InFile -Method POST  -ContentType $contentType -uri $url -PassThru -OutFile $outputPath$t"-status.log"
 
-$results = invoke-RestMethod -InFile $InFile -Method POST -PassThru -ContentType $contentType -uri $uri -OutFile $outputPath$t"-status.log"
+$results1 = (Invoke-WebRequest -Headers $headers -InFile $InFile -Method POST -ContentType $contentType -Uri $url) #-PassThru -OutFile $outputPath$t"-status.log"
+$results1.Content | Out-File $status_log_path
+$results = ($results1.Content | ConvertFrom-Json)
+#$results.id | Out-String
+do{
+  Write-Host $status_line
+  $status_url = "https://$domain/api/v1/accounts/"+$account_id+"/sis_imports/"+$results.id
+  $results1 = (Invoke-WebRequest -Headers $headers -Method GET -Uri $status_url) #-PassThru -OutFile $outputPath$t"-status.log"
+  $results1.Content | Out-File -Append $status_log_path
+  $results = ($results1.Content | ConvertFrom-Json)
+  #$results.id | Out-String
+ if($results -eq $null){
+    break
+  }
+}
+while($results.progress -lt 100 -and $results.workflow_state -ne "failed_with_messages")
+$results1.Content | Out-File -Append $status_log_path
 
-Write-Host "output here"
-
-Write-Host $results.workflow_state
-
-Move-Item $outputPath$outputZip $outputPath$t-$outputZip
+Move-Item -Force $outputPath$outputZip $outputPath$t-$outputZip
 Remove-Item $sourceDir*.csv
