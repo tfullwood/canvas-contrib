@@ -2,3 +2,4 @@ SIS Integration/Examples/C_SharpCanvasSISPublish/CanvasSISImport/bin/Debug/Canva
 SIS Integration/Examples/C_SharpCanvasSISPublish/CanvasSISImport/bin/Debug/CanvasSISPublish.exe.mdb
 *.swp
 *.pyc
+localconfig.sh
