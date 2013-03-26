@@ -68,11 +68,15 @@ _date=`date "+%Y-%m-%d_%H-%M-%S"`
 zip_file="$SOURCE_FOLDER/$_date.zip"
 
 # If there are no CSV files to process, exit the script
-if [ ! -e "$SOURCE_FOLDER/new/"*.csv ]; 
-then 
+files=$(ls "$SOURCE_FOLDER/new/"*.csv 2> /dev/null | wc -l)
+echo "files" $files
+if [ $files -eq 0 ]
+then
   echo $DIVIDER
   echo 'There are no csv files in $SOURCE_FOLDER/new/'; 
   exit 1
+else
+  echo "$files CSV files exist: do something with them"
 fi
 
 echo "creating $zip_file with $SOURCE_FOLDER/new/*.csv"
