@@ -68,8 +68,8 @@ _date=`date "+%Y-%m-%d_%H-%M-%S"`
 zip_file="$SOURCE_FOLDER/$_date.zip"
 
 # If there are no CSV files to process, exit the script
+# This is based on a snippet from http://www.ducea.com/2009/03/05/bash-tips-if-e-wildcard-file-check-too-many-arguments/
 files=$(ls "$SOURCE_FOLDER/new/"*.csv 2> /dev/null | wc -l)
-echo "files" $files
 if [ $files -eq 0 ]
 then
   echo $DIVIDER
