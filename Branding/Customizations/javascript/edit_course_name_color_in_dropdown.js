@@ -1,5 +1,5 @@
 /*
-  This snippet allows you to change the color of a course/courses listed in the Course dropdown, 
+  This snippet allows you to change the color of a course/courses listed in the Courses dropdown, 
   based off a keyword in the course name
 	
   Originally used because an institution wanted their template/master courses (with "Template" in the name) 
