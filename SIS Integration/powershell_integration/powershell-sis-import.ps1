@@ -25,7 +25,7 @@ if($outputZip.Contains('\')){
 
 $contentType = "application/zip" # don't change
 $InFile = $outputPath+$outputZip # don't change
-#write-zip -Path $sourceDir"*.csv" -OutputPath $InFile
+write-zip -Path $sourceDir"*.csv" -OutputPath $InFile
 
 $t = get-date -format M_d_y_h
 $status_log_path = $outputPath+$t+"-status.log"
@@ -50,6 +50,8 @@ do{
 }
 while($results.progress -lt 100 -and $results.workflow_state -ne "failed_with_messages")
 $results1.Content | Out-File -Append $status_log_path
+
+# The sis import is done, you might do something else here like trigger course copies
 
 Move-Item -Force $outputPath$outputZip $outputPath$t-$outputZip
 Remove-Item $sourceDir*.csv
