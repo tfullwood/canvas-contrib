@@ -1,0 +1,21 @@
+/* 
+* Hide the custom links, but make sure the first three (1-3) and last two are displayed
+** Items 1-3 are Canvas links:
+* 1. Ask Your Instructor a Question
+* 2. Search the Canvas Guides
+* 3. Report a Problem
+** Next are custom links (e.g. 2 links):
+* 4. Custom Link 1
+* 5. Custom Link 2
+** The last two are Canvas links:
+* 6. Ask the Community
+* 7. Request a Feature (doesn't show for students)
+*/
+/* First, hide all items after the first three*/
+#help-dialog-options>li:nth-child(n+4){
+    display:none;
+}
+/* Now unhide the last two */
+#help-dialog-options>li:nth-child(n+6){
+    display:block;
+}
