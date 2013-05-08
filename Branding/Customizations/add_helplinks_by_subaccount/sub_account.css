@@ -1,0 +1,4 @@
+/* Unhide the help link for Custom Link 2 (3+2) */
+#help-dialog-options>li:nth-child(5){
+    display:block;
+}
