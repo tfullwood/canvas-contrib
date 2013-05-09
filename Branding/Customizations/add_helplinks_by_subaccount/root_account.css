@@ -19,3 +19,15 @@
 #help-dialog-options>li:nth-child(n+6){
     display:block;
 }
+
+/* Alternatively, if you don't want to worry about additional custom links being added and 
+*  messing up the unhiding of those last two, you can use the following two rules to 
+*  redisplay them a bit more explicitly */
+/* Hide "Ask the Community" */
+#help-dialog-options a[href="http://help.instructure.com/forums/20225783-canvas-coach-q-a-site"] {
+  display:block;
+}
+/* Hide "Request a Feature" */
+#help-dialog-options a[href="http://help.instructure.com/categories/20057816-feature-request-categories"] {
+  display:block;
+}
