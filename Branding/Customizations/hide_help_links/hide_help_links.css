@@ -1,0 +1,24 @@
+/* Hide "Ask Your Instructor a Question" */
+#help-dialog-options a[href="#teacher_feedback"] {
+  display:none !important;
+}
+
+/* Hide "Search the Canvas Guides" */
+#help-dialog-options a[href="http://guides.instructure.com"] {
+  display:none !important;
+}
+
+/* Hide "Report a Problem" */
+#help-dialog-options a[href="#create_ticket"] {
+  display:none !important;
+}
+
+/* Hide "Ask the Community" */
+#help-dialog-options a[href="http://help.instructure.com/forums/20225783-canvas-coach-q-a-site"] {
+  display:none !important;
+}
+
+/* Hide "Request a Feature" */
+#help-dialog-options a[href="http://help.instructure.com/categories/20057816-feature-request-categories"] {
+  display:none !important;
+}
