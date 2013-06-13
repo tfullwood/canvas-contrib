@@ -21,7 +21,7 @@ try:
   course_list_done = json.load(open(cache_filename,'r+'))
 except ValueError, err:
   course_list_done = []
-course_list = csv.DictReader(open(template_filename,'rb'))
+course_list = csv.DictReader(open(template_filename,'U'))
 
 # CHANGE THIS
 if __name__ ==  '__main__':
