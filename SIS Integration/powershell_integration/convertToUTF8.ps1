@@ -1,6 +1,11 @@
-﻿foreach($i in ls -name "C:\Users\kevinh\Desktop\courses1_csv\*.csv")
+﻿# adjust this path
+
+$path_to_csv_folder = "C:\path\to\csv\folder";
+$path_to_csv_output_folder = "C:\path\to\csv\folder"; # Change this to something different
+                                                      # if you don't want to overwrite the existing files
+foreach($i in ls -name "$path_to_csv_folder\*.csv")
 {
-    $file = get-content "C:\Users\kevinh\Desktop\courses1_csv\$i"
+    $file = get-content "$path_to_csv_folder\*.csv\$i"
     $encoding = New-Object System.Text.UTF8Encoding($False)
-    [System.IO.File]::WriteAllLines("C:\Users\kevinh\Desktop\courses2_csv\" + $i, $file, $encoding)
+    [System.IO.File]::WriteAllLines("$path_to_csv_output_folder\$i", $file, $encoding)
 }
