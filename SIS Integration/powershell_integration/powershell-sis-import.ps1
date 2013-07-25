@@ -3,7 +3,6 @@ $outputPath = "c:\some\path\to\script\output\folder\" #output path for the zip f
 $account_id = "<account_id>"
 $token = "<some_token>" # access_token
 $domain = "<school>.instructure.com"
-$account_id = "<account_id>"
 $outputZip = "courses1.csv.zip" # name of the zip file to create
 
 #################################################
