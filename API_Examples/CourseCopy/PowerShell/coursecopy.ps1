@@ -16,6 +16,13 @@ $source_course_id_column = "source_id"
 $destination_course_id_column = "destination_id"
 
 
+
+
+
+
+
+
+
 <# ------------- Don't edit anything past here unless you know what you are doing.
     NOTE: No offense, you probably do know what you're doing.  This is for those that
     do not.  
@@ -73,9 +80,9 @@ Write-Host "Log File: " + $logFilePath
 $headers = @{"Authorization"="Bearer "+$token}
 $t = get-date -format yyyyMMddHHmmssfff
 if(!(Test-Path $CSVFilePath)){
-    Write-Host $CSVFilePath
+  Write-Host $CSVFilePath
 	Write-Host "There was no csv file.  I won't do anything"
-    $output = "`r`n " + $t +":: There was no CSV file.  I won't do anything"
+  $output = "`r`n " + $t +":: There was no CSV file.  I won't do anything"
 	Add-Content -Path $logFilePath -Value $output
 }else{    
 	Import-Csv $CSVFilePath |foreach {
@@ -108,9 +115,6 @@ if(!(Test-Path $CSVFilePath)){
 	# TODO Write out the json cache again
 	$copyCache | ConvertTo-Json | Set-Content -Path $cacheFilePath
 
-
 	$processed_path = $archivePath+$t+"."+$CSVFileName+".processed"
-    #Move-Item $CSVFilePath $processed_path
+  Move-Item $CSVFilePath $processed_path
 }
-
-

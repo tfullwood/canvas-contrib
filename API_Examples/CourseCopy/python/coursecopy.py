@@ -46,6 +46,7 @@ try:
 except:
   print 'local config file not found'
   pass
+
 if "/" in CSVFileName:
     print "The CSVFilename should not contain forwardslashed.  You are warned"
 
@@ -61,18 +62,31 @@ def massDoCopies(data):
     uri2 = "https://"+domain+"/api/v1/courses/" + data[1][1] 
     #print uri2
     #print uri
+    print 'looking for course'
     found_course = requests.get(uri2,headers=headers).json()
     if found_course.get('status',None) == 'not_found':
       print 'course ', data[1][1], 'not found'
     else:
+      print 'course found',
+      print found_course
+      done = False
       result = requests.post(uri,headers=headers,params=params)
+      print 'done sending import, now check status'
+
 
       #print $result
-      output = "`r`n" + result.text
+      output = "\r\n" + result.text
       #print output
       #Add-Content -Path $logFilePath -Value $output
+      #print 'logfile',logfile
       logfile.write(output)
-      copyCache['sources'][source_id].append(csvrow[destination_course_id_column])
+      uri3 = "https://"+domain+"/api/v1/courses/" + data[1][1] + "/course_copy/" + str(result.json()['id'])
+      status = requests.get(uri3,headers=headers).json()
+      while status['workflow_state'] in ('importing','started'):
+        status = requests.get(uri3,headers=headers).json()
+        print status['workflow_state']
+      print status['workflow_state']
+      #copyCache['sources'][source_id].append(csvrow[destination_course_id_column])
   else:
     print "would've sent this request",uri,params
     params = {'source_course': data[1][0]}
@@ -82,7 +96,11 @@ def massDoCopies(data):
 
 def runCopies(copies):
   pool = Pool(processes=num_processes)
-  res = pool.map(massDoCopies,[(copies,x) for x in copies[1:]])
+  res = pool.map(massDoCopies,[(copies,x) for x in copies[6:]])
+
+def runCopies_2(copies):
+  for x in copies[2:6]:
+    massDoCopies((x,x))
 
 CSVFilePath = os.path.join(workingPath, CSVFileName)
 archivePath = os.path.join(workingPath, "archives")
@@ -138,7 +156,6 @@ if not os.path.exists(CSVFilePath):
 else:
   times = 1
   for csvrow in UnicodeDictReader(open(CSVFilePath,'rb')):
-    print 'times',times
     times+=1
     # TODO: If course::destination is in the cache, don't do it #>
     # Check $obj.sources contains $_.source_id
