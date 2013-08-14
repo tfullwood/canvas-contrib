@@ -8,10 +8,10 @@
  $domain = the full domain name you use to access canvas. (i.e. something.instructure.com)
 #>
 
-$token = "<access_token>" # access_token
-$workingPath = "C:\path\to\working\folder\"; # Important! Make sure this ends with a backslash
+$token = "<token_here>" # access_token
+$workingPath = "C:\path\to\working\path\"; # Important! Make sure this ends with a backslash
 $CSVFileName = "csvfile.csv" # The name of the course copy CSV file.  Not the full path
-$domain = "<schoolname_test>.instructure.com"
+$domain = "<domain>.instructure.com"
 $source_course_id_column = "source_id"
 $destination_course_id_column = "destination_id"
 
@@ -91,15 +91,16 @@ if(!(Test-Path $CSVFilePath)){
 
 	  
 	  $source_id = ""+$_.$source_course_id_column
+      $destination_id = ""+$_.$destination_course_id_column
 	  if($copyCache.sources -eq $null){
 	    $copyCache.Add("sources",@{$source_id=@()})
 	  }
 	  if($copyCache.sources.$source_id -lt 1){
-	    $copyCache.sources | Add-Member -MemberType NoteProperty -Name $source_id -Value New-Object #System.Collections.ArrayList
+	    $copyCache.sources | Add-Member -MemberType NoteProperty -Name $source_id -Value (@())
 	  }
 	  
-	  if(!($copyCache.sources.$source_id -contains $_.destination_id)){
-	    $uri = "https://"+$domain+"/api/v1/courses/" + $_.destination_id + "/course_copy?source_course=" + $_.$source_course_id_column
+	  if(!($copyCache.sources.$source_id -contains $destination_id)){
+	    $uri = "https://"+$domain+"/api/v1/courses/" + $destination_id + "/course_copy?source_course=" + $source_id
 	    Write-Host $uri
 	  
 	    $result = Invoke-RestMethod -Method POST -uri $uri -Headers $headers
@@ -107,7 +108,8 @@ if(!(Test-Path $CSVFilePath)){
 	    #Write-Host $result
 	    $output = "`r`n" + $result
 	    Add-Content -Path $logFilePath -Value $output
-	    $copyCache.sources.$source_id +=$_.$destination_course_id_column
+        
+	    $copyCache.sources.$source_id += $destination_id
 	  }
 	  
 	}
