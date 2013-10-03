@@ -12,9 +12,6 @@
  *
  **/
 $(document).ready(function(){
-  if(window.location.pathname.search('login')){
-    var sp = $('#login_form label[for=pseudonym_session_unique_id]>span');
-
-    sp.text('<replacement>');
-  }
+  var sp = $('#login_form label[for=pseudonym_session_unique_id]>span');
+  sp.text('<replacement>');
 });
