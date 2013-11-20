@@ -1,6 +1,10 @@
 Windows-based SIS Integration Automation
 ======
 
+NOTE: This method is not the most reliable method of doing the integration.  Installing 
+CURL on Windows proves to be fairly problematic and error prone.  I recommend you look
+into using the Powershell scripts instead at https://github.com/kajigga/canvas-contrib/tree/master/SIS%20Integration/powershell_integration.
+
 This folder includes a batch-based script that can be used to automate
 uploads of the zipped collection of CSV files exported from the SIS
 system to the running Canvas instance. This script is suitable for use

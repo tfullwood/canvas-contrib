@@ -9,6 +9,8 @@
  * not interfere with the normal quiz-taking process.
  *
  */
+
+var base_url_for_links = "https://s3.amazonaws.com/SSL_Assets/sae/us/";
 $(document).ready(function () {
   if(window.location.href.match(/quizzes\/\d+\/take/)){
       var course_id = ENV.context_asset_string.split('_')[1];
@@ -17,7 +19,7 @@ $(document).ready(function () {
           for(ei=0;ei<_data.length;ei++){
             if(_data[ei].course_id == course_id){
               console.log(_data[ei]);
-              $('head').append('<link rel="stylesheet" href="./noprint.css" media="print" type="text/css" />');
+              $('head').append('<link rel="stylesheet" href="' + base_url_for_links + 'noprint.css" media="print" type="text/css" />');
             }
           }
         });

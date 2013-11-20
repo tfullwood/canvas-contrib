@@ -9,23 +9,30 @@
 #>
 
 $token = "<token_here>" # access_token
-$workingPath = "C:\path\to\working\path\"; # Important! Make sure this ends with a backslash
-$CSVFileName = "csvfile.csv" # The name of the course copy CSV file.  Not the full path
-$domain = "<domain>.instructure.com"
+$workingPath = "C:\Users\kevinh\Desktop\CanvasImport\"; # Important! Make sure this ends with a backslash
+$CSVFileName = "canvas.templates.csv" # The name of the course copy CSV file.  Not the full path
+$domain = "yourdomain.test.instructure.com"
+
+
+# These are good defaults if you base your file on the example file
 $source_course_id_column = "source_id"
 $destination_course_id_column = "destination_id"
 
+$move_csv_file_to_archive = $false; # change this to $true if you want to move the CSV
+                                    # file after the copy is completed
 
-
-
-
-
-
-
-
-<# ------------- Don't edit anything past here unless you know what you are doing.
-    NOTE: No offense, you probably do know what you're doing.  This is for those that
-    do not.  
+<# ------------------------------------------------------------------------------------
+   ------------------------------------------------------------------------------------
+   ------------------------------------------------------------------------------------
+   ------------------------------------------------------------------------------------
+   ------------------------------------------------------------------------------------
+   ------------------------------------------------------------------------------------
+   ------------------------------------------------------------------------------------
+   ------------------------------------------------------------------------------------
+   ------------------------------------------------------------------------------------
+   ------------------------------------------------------------------------------------
+    Don't edit anything past here unless you know what you are doing.  
+    NOTE: No offense, you probably do know what you're doing.  This is for those that don't.  
 #>
 
 # Just in case $workinPath doesn't end with a \, add it.
@@ -53,12 +60,12 @@ if(!(Test-Path -Path $logPath)){
 }
 if(!(Test-Path -Path $logFilePath))
   {
-   new-item -Path $logFilePath –itemtype file
+   new-item -Path $logFilePath ¿itemtype file
   }
  
 if(!(Test-Path -Path $cacheFilePath))
   {
-   new-item -Path $cacheFilePath –itemtype file
+   new-item -Path $cacheFilePath ¿itemtype file
    $copyCache = [ordered]@{}
    $copyCache.sources = @{}
    $copyCache.ToString() | ConvertTo-Json | Set-Content -Path $cacheFilePath
@@ -84,22 +91,38 @@ if(!(Test-Path $CSVFilePath)){
 	Write-Host "There was no csv file.  I won't do anything"
   $output = "`r`n " + $t +":: There was no CSV file.  I won't do anything"
 	Add-Content -Path $logFilePath -Value $output
-}else{    
+}else{  
+  if($copyCache.sources -eq $null){
+	    #$copyCache.Add("sources",@{$source_id=@()})
+      $copyCache | Add-Member -MemberType NoteProperty -Name "sources" -Value (@())
+	}
+  if($copyCache.all_list -eq $nul1){
+      #$copyCache.Add("all_list",@())
+      $copyCache | Add-Member -MemberType NoteProperty -Name "all_list" -Value (@())
+  }
 	Import-Csv $CSVFilePath |foreach {
-	  <# TODO: If course::destination is in the cache, don't do it #>
+	  <# If course::destination is in the cache, don't do it #>
 	  # Check $obj.sources contains $_.source_id
 
 	  
 	  $source_id = ""+$_.$source_course_id_column
-      $destination_id = ""+$_.$destination_course_id_column
-	  if($copyCache.sources -eq $null){
-	    $copyCache.Add("sources",@{$source_id=@()})
-	  }
-	  if($copyCache.sources.$source_id -lt 1){
+    $destination_id = ""+$_.$destination_course_id_column
+
+    # Question: Does it matter if this course already copied from another course?  Maybe
+    # it should never receive an automated copy after the first copy.
+	  
+    
+    if($copyCache.sources.$source_id -lt 1){
 	    $copyCache.sources | Add-Member -MemberType NoteProperty -Name $source_id -Value (@())
 	  }
+    
 	  
-	  if(!($copyCache.sources.$source_id -contains $destination_id)){
+	  if(($copyCache.sources.$source_id -contains $destination_id) -or ($copyCache.all_list -contains $destination_id)){
+      # Don't do the course copy, this course has already had a copy applied to it
+      # via some automated script.
+      Write-Host "I'm not doing the course copy for $destination_id from $source_id because this course has already received a copy."
+    
+    }else{
 	    $uri = "https://"+$domain+"/api/v1/courses/" + $destination_id + "/course_copy?source_course=" + $source_id
 	    Write-Host $uri
 	  
@@ -109,7 +132,11 @@ if(!(Test-Path $CSVFilePath)){
 	    $output = "`r`n" + $result
 	    Add-Content -Path $logFilePath -Value $output
         
-	    $copyCache.sources.$source_id += $destination_id
+	    # The following line is broken, not sure why
+      # If someone figures out why please fix and submit the change
+      # The script will run without it
+      # $copyCache.sources.$source_id += $destination_id
+      $copyCache.all_list += $destination_id
 	  }
 	  
 	}
@@ -118,5 +145,7 @@ if(!(Test-Path $CSVFilePath)){
 	$copyCache | ConvertTo-Json | Set-Content -Path $cacheFilePath
 
 	$processed_path = $archivePath+$t+"."+$CSVFileName+".processed"
-  Move-Item $CSVFilePath $processed_path
+  if ($move_csv_file_to_archive -eq $true){
+    Move-Item $CSVFilePath $processed_path
+  }
 }
