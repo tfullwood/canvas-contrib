@@ -10,7 +10,9 @@
  *
  */
 
-var base_url_for_links = "https://s3.amazonaws.com/SSL_Assets/sae/us/";
+// Edit this line to match the full path to where the noprint.css file is located at
+var base_url_for_links = "https://s3.amazonaws.com/SSL_Assets/kevin/css/";
+
 $(document).ready(function () {
   if(window.location.href.match(/quizzes\/\d+\/take/)){
       var course_id = ENV.context_asset_string.split('_')[1];
