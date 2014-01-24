@@ -42,6 +42,7 @@ do{
   $results1 = (Invoke-WebRequest -Headers $headers -Method GET -Uri $status_url) #-PassThru -OutFile $outputPath$t"-status.log"
   $results1.Content | Out-File -Append $status_log_path
   $results = ($results1.Content | ConvertFrom-Json)
+  Start-Sleep -s 5
   #$results.id | Out-String
  if($results -eq $null){
     break

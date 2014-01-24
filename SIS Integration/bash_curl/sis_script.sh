@@ -2,7 +2,6 @@
 
 # Edit the following variables
 access_token="<put_your_token_here>" # Change this to your access token
-account_id="<account_id>" # Change this to your account ID
 domain="<domain_here>" # Change this to your account subdomain (i.e. cwt for cwt.instructure.com)
 SOURCE_FOLDER="/path/to/source_folder"
 path_to_python_parser=""
@@ -89,7 +88,8 @@ mkdir -p "$SOURCE_FOLDER/archive/$_date/"
 #echo $json
 
 # Bash function to pull out a json value.  This function is VERY tempermental.  If you
-# can, use the python parser.  It works with Python >= 2.6
+# can, use the python parser.  It works with Python >= 2.6.  Did I say this function is
+# tempermental?
 function bashjsonval {
   temp=`echo $json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g' | sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w $prop`
   echo ${temp##*|}
@@ -115,13 +115,14 @@ jsonval () {
 
 echo $DIVIDER
 echo "Starting the import...now"
-json=`curl -s -F attachment=@"$zip_file" -F "extension=zip" -F "import_type=instructure_csv" -H "Authorization: Bearer $access_token" "https://$domain.instructure.com/api/v1/accounts/$account_id/sis_imports.json"`
+json=`curl -s -F attachment=@"$zip_file" -F "extension=zip" -F "import_type=instructure_csv" -H "Authorization: Bearer $access_token" "https://$domain.instructure.com/api/v1/accounts/self/sis_imports.json"`
 
 id=$(echo $json | jsonval id) 
 echo $DIVIDER
 echo "SIS Import ID: "  "$id"
+
 # Do a check on the ID.  It should be a number, if it isn't then stop the script now
-# before anything else happens
+# before anything bad :) happens
 if [ -z "${id##*[!0-9]*}" ]; then
   echo "Something was wrong with the initial sis import...stopping now"
   echo $json
@@ -135,11 +136,10 @@ workflow_state=$(echo $json | jsonval workflow_state)
 progress=$(echo $json | jsonval progress) 
 
 #echo $workflow_state
-echo "checking status at https://$domain.instructure.com/api/v1/accounts/$account_id/sis_imports/$id"
+echo "checking status at https://$domain.instructure.com/api/v1/accounts/self/sis_imports/$id"
 while [[ $progress -lt 100 && $workflow_state != "imported" ]]; do
   sleep 3
-  json=`curl -s -H "Authorization: Bearer $access_token" "https://$domain.instructure.com/api/v1/accounts/$account_id/sis_imports/$id"`
-  #$json = $(echo $json | sed 's/\\/\\\\/g')
+  json=`curl -s -H "Authorization: Bearer $access_token" "https://$domain.instructure.com/api/v1/accounts/self/sis_imports/$id"`
   workflow_state=$(echo $json | jsonval workflow_state) 
   progress=$(echo $json | jsonval progress) 
   echo "$workflow_state, $progress%"
