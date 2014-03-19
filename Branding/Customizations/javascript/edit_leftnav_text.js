@@ -7,5 +7,7 @@ This snippet allows you to change the text for a link in the left-hand navigatio
 <replacement_text> replace with the new text you want the link to use
 */
 
-$('#section-tabs .<class_name>').text('<replacement_text>');
+$(document).ready(function(){
+  $('#section-tabs .<class_name>').text('<replacement_text>');
+});
 /* Example: $('#section-tabs .quizzes').text('Exams/Quizzes'); */

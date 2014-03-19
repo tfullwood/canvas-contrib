@@ -1,0 +1,8 @@
+/**
+ * This css file makes the module item select box resize to bit the size of the
+ * module modal.
+ **/
+.module_item_select {
+  max-width: none !important;
+  width: 100%;
+}

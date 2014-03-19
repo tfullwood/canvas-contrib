@@ -13,4 +13,4 @@ of '-antee'.  No support is provided either.  You use at your own judgement and 
 that your are responsible for it working or not working.
 
 
-.. _pr_gallery link: peer_review_as_gallery.js
+.. _pr_gallery link: ./peer_review_as_gallery.js

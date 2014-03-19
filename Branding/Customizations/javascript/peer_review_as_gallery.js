@@ -33,19 +33,22 @@ var pr = {
 };
 
 
-$(document).ready(pr.init);
-
-
 var b1;
-for(x=0;x<$('b').length;x++){ 
-  if($($('b')[x]).text()=='Assigned Peer Reviews'){ 
-    b1=$('b')[x];
-    break;
+$(document).ready(function(){
+  
+  for(x=0;x<$('b').length;x++){ 
+    if($($('b')[x]).text()=='Assigned Peer Reviews'){ 
+      b1=$('b')[x];
+      break;
+    }
   }
-}
 
-if(b1!===undefined){
-  var l = $(b1.nextElementSibling);
-  var reviews = l.find('a:visible');
-  // Count the reviews, save the list to a cookie for use later.
-}
+  if(b1!===undefined){
+    var l = $(b1.nextElementSibling);
+    var reviews = l.find('a:visible');
+    // Count the reviews, save the list to a cookie for use later.
+  }
+  pr.init()
+});
+
+

@@ -9,7 +9,9 @@
   <COLOR> replace with the color you'd like to change the course name to. Can be color name ("green"), hex value ("#2E9524"), etc.
 */
 
-$("ul.menu-item-drop-column-list li.customListItem span.ellipsis:contains('<KEYWORD>')").css("color", "<COLOR>");
+$(document).ready(function(){
+  $("ul.menu-item-drop-column-list li.customListItem span.ellipsis:contains('<KEYWORD>')").css("color", "<COLOR>");
+});
 
 
 
