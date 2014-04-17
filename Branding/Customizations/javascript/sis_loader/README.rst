@@ -13,3 +13,7 @@ folder containing these javascript files.
 
 Add the contents of load_this_file.js to your existing branding javascript file or use it
 as the branding javascript file if you don't have another file already.
+
+This script uses dust, a javascript templating library, to generate the HTML on the page.
+That is why the dust-core.min.js file is needed.  templates.js containes the compiled
+templates themselves.
