@@ -1,4 +1,4 @@
-# Williams College: Canvas Mods
+# Add Presenter View (zoom content area; hide all other columns)
 
 **Author:** Developed by David Keiser-Clark (dwk2@williams.edu) for the Office for Information Technology at Williams College
 
@@ -11,8 +11,6 @@
  - [Add Presenter View](http://www.screencast.com/t/mclVJfL28 "Add Presenter View") (screenshot)
 
 ## FEATURES
-
-#### Add Presenter View (zoom content area; hide all other columns)
 
  - Add Link: Automatically insert a "Presenter View" hyperlink on the right-side of the "breadcrumbs" navigation
  - Zoom: Increase zoom by 50% (transform scale is customizable)

@@ -1,4 +1,4 @@
-# Williams College: Canvas Mods
+# Minor fixes for Canvas
 
 **Author:** Developed by David Keiser-Clark (dwk2@williams.edu) for the Office for Information Technology at Williams College
 
