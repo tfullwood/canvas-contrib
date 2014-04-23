@@ -12,3 +12,4 @@
 
  - Login Page: Add tabindex attributes to the primary input fields so users may proceed from 'email' to 'password' to 'login' button
  - Login Page: Add 'type=text' attribute to username input field (so that on mobile version the default Canvas css styles apply to it the same as to password field)
+
