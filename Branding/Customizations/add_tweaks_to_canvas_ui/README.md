@@ -1,4 +1,4 @@
-# Minor fixes for Canvas
+# Add Tweaks to Canvas UI
 
 **Author:** Developed by David Keiser-Clark (dwk2@williams.edu) for the Office for Information Technology at Williams College
 
@@ -8,8 +8,6 @@
 
 ## FEATURES
 
-#### Minor issues that Canvas should correct in its core version
-
- - Login Page: Add tabindex attributes to the primary input fields so users may proceed from 'email' to 'password' to 'login' button
+ - Login Page: Add tabindex attributes to the primary input fields so users may proceed directly from 'email' to 'password' to 'login' button
  - Login Page: Add 'type=text' attribute to username input field (so that on mobile version the default Canvas css styles apply to it the same as to password field)
 
