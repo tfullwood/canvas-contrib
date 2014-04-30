@@ -60,12 +60,12 @@ if(!(Test-Path -Path $logPath)){
 }
 if(!(Test-Path -Path $logFilePath))
   {
-   new-item -Path $logFilePath ¿itemtype file
+   new-item -Path $logFilePath itemtype file
   }
  
 if(!(Test-Path -Path $cacheFilePath))
   {
-   new-item -Path $cacheFilePath ¿itemtype file
+   new-item -Path $cacheFilePath itemtype file
    $copyCache = [ordered]@{}
    $copyCache.sources = @{}
    $copyCache.ToString() | ConvertTo-Json | Set-Content -Path $cacheFilePath
