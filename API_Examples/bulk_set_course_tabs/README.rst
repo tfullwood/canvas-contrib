@@ -22,8 +22,10 @@ Step 3: Create a CSV file to match the format of the example `csvfile.csv`.  Sav
 whatever you set the `template_filename` to. The format is simple, actually, with only one
 column:
 
-	course_id
-	somecanvasid
+
+.. csv-table:: Course List
+   :header: "course_id"
+	 somecanvasid
 
 
 This example uses SIS id's to reference the courses
@@ -39,5 +41,5 @@ This one uses one canvas id and one sis id
 .. csv-table:: Course List
    :header: "course_id"
 
-	somecanvasid
-  sis_course_id:someothersisid
+	 somecanvasid
+   sis_course_id:someothersisid
