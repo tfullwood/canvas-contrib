@@ -21,7 +21,8 @@ CSVFileName = "csvfile.csv" # The name of the course copy CSV file.  Not the ful
 domain = "<schoolname_test>.instructure.com"
 source_course_id_column = "course_id"
 num_processes = 4 # Change this to be the number of concurrent course tab changes to run at once.  
-# Set the tab order here.  
+# Set the tab order here. Each item is composed of two pieces.  The first is the tab_id of
+# the navigation element.  The second is whether the tab is hidden.
 # Note: the home and settings tabs are fixed at the start and end of the list respectively
 # and cannot be moved.
 course_tab_order = ( 
