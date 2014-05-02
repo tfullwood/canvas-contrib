@@ -28,11 +28,16 @@ column:
 
 This example uses SIS id's to reference the courses
 
-	cource_id
-	sis_course_id:somesisid
+.. csv-table:: Course List
+   :header: "course_id"
+	
+   sis_course_id:somesisid
+   sis_course_id:anothersisid
 
 This one uses one canvas id and one sis id
 
-	cource_id
+.. csv-table:: Course List
+   :header: "course_id"
+
 	somecanvasid
   sis_course_id:someothersisid
