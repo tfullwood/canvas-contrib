@@ -95,8 +95,9 @@ $(document).ready(function () {
 					$("DIV#header").addClass("wmsDisplayNone");
 					$("DIV#left-side").addClass("wmsDisplayNone");
 					$("DIV#right-side-wrapper").addClass("wmsDisplayNone");
-					//$("FOOTER").addClass("wmsDisplayNone");
 					$("DIV#main").addClass("wmsMarginZero").css("cssText", "padding-left: 25px;max-width: 900px !important;"); // max-width should match value given to scalePage(), below
+					// force all images to zoom correctly and avoid cutting off images; requires removing the default style: IMG{max-width:1050px}
+					$("IMG").css("cssText","max-width: 100% !important;");
 
 					// do scale function
 					scalePage(900); // set somewhat arbitrary hardcoded minWidth value
