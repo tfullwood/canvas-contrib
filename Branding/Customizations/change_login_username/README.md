@@ -10,7 +10,7 @@ http://guides.instructure.com/s/2204/m/4214/l/41896-how-do-i-brand-my-canvas-ins
 learn more about this file.
 
 When implementing this script, replace `<replacement>` with the text you want to appear.
-For example, you may want to have that text be "A-Number" rather than "email".  
+For example, you may want to have that text be "NetID" rather than "email".  
 
 
 Support
