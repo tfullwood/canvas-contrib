@@ -18,6 +18,7 @@
  - Zoom: Increase scale of main (center) region to fill browser, wrapping text as needed
  - Rescale: Resize browser to dynamically increase/decrease visible aspect (zoom) ratio of text and images
  - Hide: Display only main (center) div (hide: top, left, right)
+ - Hide: Do not display on urls containing '/external_tools/' (LTI iframe apps) as the JS would be prevented from communicating with the iframe
  - Display All: Increase height dynamically to prevent zoomed page from being inappropriately cut off
  - Resolution: Set width to 900px to ensure magnification occurs in our wired classrooms
  - Exit: Easily return to "normal mode" via "exit" button on left side of screen
