@@ -1,3 +1,4 @@
+
 course_data = [
   {"name":"History of Western Art","dept":"Art","short_name":"ARTS 001"},
   {"name":"Fundamentals of Drawing","dept":"Art","short_name":"ARTS 011"},
@@ -368,7 +369,6 @@ course_data = [
   {"name":"Advanced Human Diversity Issues","dept":"Counseling Psychology","short_name":"CPSY 235"},
   {"name":"Alcohol & Chemical Dependency","dept":"Counseling Psychology","short_name":"CPSY 240A"},
   {"name":"Child Abuse Assessment and Reporting","dept":"Counseling Psychology","short_name":"CPSY 240B"},
-  {"name":"Human Sexuality & Counseling","dept":"Counseling Psychology","short_name":"CPSY 245A"},
   {"name":"Psychopharmacology","dept":"Counseling Psychology","short_name":"CPSY 245B"},
   {"name":"HIV/AIDS Assessment and Treatment","dept":"Counseling Psychology","short_name":"CPSY 245C"},
   {"name":"Treatment of Children","dept":"Counseling Psychology","short_name":"CPSY 260"},

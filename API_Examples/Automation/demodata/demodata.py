@@ -5,13 +5,15 @@ import sys
 import time
 from democoursedata import course_data
 from random import choice
+from random_sources import first_names,last_names
+import requests
 
 class DemoMaker(object):
   #user_fieldnames = ('user_id','login_id','password','email','status')
   data = {
       'user':{
         'id_pattern' : "u.%s.%s",
-        'fieldnames':('user_id','login_id','password','status'),
+        'fieldnames':('user_id','first_name','last_name','login_id','password','status'),
       },
       'course':{
         'id_pattern' : "c.%s.%s",
@@ -34,14 +36,32 @@ class DemoMaker(object):
       }}
 
 
-  def __init__(self,num_users=10):
-    self.num_users = num_users
+  names_list = []
+  def __init__(self,num_users=10,num_courses=1):
+    self.num_courses = int(num_courses)
+    self.num_users = (self.num_courses * 3) + int(num_users)
     self.runtime = int(time.mktime(time.localtime())) 
 
+    print 'Building %s courses with %s users' % (self.num_courses,self.num_users)
+
+    
+    #names_list = requests.get("http://namey.muffinlabs.com/name.json?frequency=rare&count=%d" % self.num_users).json()
+    # names_list = requests.get("http://namey.muffinlabs.com/name.json?frequency=rare&count=%d" % 10).json()
     for k in self.data.keys():
       self.data[k]['headers'] = dict((n,n) for n in self.data[k]['fieldnames']) 
       self.data[k]['create'] = {}
       self.data[k]['delete'] = {}
+
+  def getFirstName(self):
+    return choice(first_names.FIRST_NAMES)
+
+  def getLastName(self):
+    return choice(last_names.LAST_NAMES)
+
+  def getRandomCourse(self):
+    random_course = choice(course_data)
+    random_course['short_name'].replace(' ','_')
+    return random_course
 
   def setFile(self,wr_type):
     self.data[wr_type]['create'].setdefault('file',open('./output/create/%s.csv'%wr_type,'wt'))
@@ -81,13 +101,15 @@ class DemoMaker(object):
     # First create users
     #writer = csv.DictWriter(user_file,fieldnames=user_fieldnames)
     #writer.writerow(user_headers)
-    for x in xrange(int(sys.argv[1])):
+    for x in xrange(0,int(self.num_users)):
       user_id = self.data['user']['id_pattern'] % (self.runtime,x)
       user = dict(
           user_id = user_id,
           login_id = user_id,
           password = self.runtime,
           #email = 'kajigga+%s@gmail.com' % user_id,
+          first_name = self.getFirstName(),
+          last_name = self.getLastName(),
           status = 'active')
       self.addData('user',user)
 
@@ -95,9 +117,15 @@ class DemoMaker(object):
     acct = {
         'account_id':self.data['account']['id_pattern'] % (self.runtime,'math'),
         'parent_account_id':'',
-        'name':'Mathematics %s ' % self.runtime,
+        'name':'Online Learning %s ' % self.runtime,
         'status':'active'}
     self.addData('account',acct)
+    # Create a sub-account
+    sub_acct = {
+        'account_id':self.data['account']['id_pattern'] % (self.runtime,'math'),
+        'parent_account_id':acct['account_id'],
+        'name':'Online Learning Summer 2013%s ' % self.runtime,
+        'status':'active'}
 
     # Create a term
     term = {
@@ -106,58 +134,82 @@ class DemoMaker(object):
         'status':'active'}
     self.addData('term',term)
 
+    current_user = 0
     # Create a course
-    course = dict(
-      course_id=self.data['course']['id_pattern'] % (self.runtime, 'math'),
-      account_id = acct['account_id'],
-      term_id = term['term_id'],
-      long_name = 'Math 100',
-      short_name = 'math100.%s' % self.runtime,
-      status = 'active')
-    self.addData('course',course)
+    courses = []
+    sections = []
+    for x in range(0,int(self.num_courses)):
+      current_user+=1
+      random_course = self.getRandomCourse()
+      course = dict(
+        # TODO Randomly choose a course title
+        course_id=self.data['course']['id_pattern'] % (self.runtime, random_course['short_name']),
+        account_id = sub_acct['account_id'],
+        term_id = term['term_id'],
+        long_name = random_course['name'],
+        #short_name = 'math100.%s' % self.runtime,
+        short_name = '%s: %s' % (random_course['short_name'],self.runtime),
+        status = 'active')
+      courses.append(course)
+      self.addData('course',course)
 
-    # Create a Section
-    section_id = self.data['section']['id_pattern'] % (course['course_id'], '1')
-    section = dict(
-      section_id=section_id,
-      course_id = course['course_id'],
-      name = 'Math 100',
-      status = 'active')
-    self.addData('section',section)
+      # Create a Section
+      section_id = self.data['section']['id_pattern'] % (course['course_id'], '1')
+      section = dict(
+        section_id=section_id,
+        course_id = course['course_id'],
+        name = "%s [%s]" % (course['long_name'],section_id),
+        status = 'active')
+      sections.append(section)
+      self.addData('section',section)
 
-    # Create enrollments for all users, where we have 
-    #  - one teacher
-    #  - one ta
-    #  - one designer
-    #  - all the rest as students
+      teacher =  self.data['user']['create']['data'][current_user]
+      # Create enrollments for all users, where we have 
+      #  - one teacher
+      #  - one ta
+      #  - one designer
+      #  - all the rest as students
 
-    self.addData('enrollment', dict(
-      user_id = self.data['user']['create']['data'][0]['user_id'],
-      section_id= section_id,
-      role = 'teacher',
-      status = 'active'))
+      self.addData('enrollment', dict(
+        user_id = teacher['user_id'],
+        section_id= section_id,
+        role = 'teacher',
+        status = 'active'))
 
-    self.addData('enrollment', dict(
-      user_id = self.data['user']['create']['data'][1]['user_id'],
-      section_id= section_id,
-      role = 'ta',
-      status = 'active'))
+      current_user+=1
+      ta =  self.data['user']['create']['data'][current_user]
+      self.addData('enrollment', dict(
+        user_id = ta['user_id'],
+        section_id= section_id,
+        role = 'ta',
+        status = 'active'))
 
-    self.addData('enrollment',dict(
-      user_id = self.data['user']['create']['data'][2]['user_id'],
-      section_id= section_id,
-      role = 'designer',
-      status = 'active'))  
+      current_user+=1
+      designer =  self.data['user']['create']['data'][current_user]
+      self.addData('enrollment',dict(
+        user_id = designer['user_id'],
+        section_id= section_id,
+        role = 'designer',
+        status = 'active'))  
 
-    for s in self.data['user']['create']['data'][3:]:
+    for s in self.data['user']['create']['data'][current_user+1:]:
       self.addData('enrollment', dict(
         user_id = s['user_id'],
-        section_id = section_id,
+        section_id = choice(sections)['section_id'],
         role = 'student',
         status = 'active'))
     
     self.writeFiles()
-    print "created, password for users is %s" % self.runtime
+    print "created %d courses and %d users. The password for users is %s" % (self.num_courses,self.num_users,self.runtime)
 
-d = DemoMaker(int(sys.argv[1]))
+from optparse import OptionParser
+parser = OptionParser()
+parser.add_option("-c", "--courses", dest="num_courses",
+                  help="number of courses", default=1,metavar="FILE")
+parser.add_option("-u", "--users",
+                  dest="num_users", default=10,
+                  help="number of users")
+
+(options, args) = parser.parse_args()
+d = DemoMaker(options.num_users,options.num_courses)
 d.setupDemo()
