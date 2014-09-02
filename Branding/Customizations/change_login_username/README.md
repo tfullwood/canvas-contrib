@@ -1,16 +1,15 @@
 Customizing the Top Menu with JavaScript 
 ======
 
-This script describes how you would change the text in the email box on the Canvas
-Login page.  By default, the text in the box is "Email" but this script will allow you
-to change this.  
+This code allows you to  change the text in the email box on the Canvas login page. 
+By default, the text in the box is "Email" but this script will allow you to change this.  
 
-To use this script, include it in your global javascript file.  See
-http://guides.instructure.com/s/2204/m/4214/l/41896-how-do-i-brand-my-canvas-instance to
-learn more about this file.
+To make this change, include the JS and CSS in your global JavaScript file and CSS file, 
+respectively. See http://guides.instructure.com/s/2204/m/4214/l/41896-how-do-i-brand-my-canvas-instance 
+to learn more about these files. 
 
 When implementing this script, replace `<replacement>` with the text you want to appear.
-For example, you may want to have that text be "A-Number" rather than "email".  
+For example, you may want to have that text be "NetID" rather than "email".  
 
 
 Support
