@@ -10,9 +10,9 @@ old_user_id,new_user_id
 
 """
 
-filename = 'change_users.csv' # Change this to the file with the two columns
-domain = '<some_domain>.instructure.com' # Change this
-token = '<your_token_here>' # Change this
+filename = '/Users/kevin/Desktop/tmp/egc.correctusers.csv' # Change this to the file with the two columns
+domain = '<schoolname>.instructure.com' # Change this
+token = 'tokenhere' # Change this
 
 
  
