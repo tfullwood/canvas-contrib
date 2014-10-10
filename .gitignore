@@ -3,3 +3,7 @@ SIS Integration/Examples/C_SharpCanvasSISPublish/CanvasSISImport/bin/Debug/Canva
 *.swp
 *.pyc
 localconfig.sh
+API_Examples/Automation/demodata/output
+API_Examples/bulk_set_course_tabs/logs
+local_config.py
+*.zip
