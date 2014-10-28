@@ -1,9 +1,9 @@
 # Edit these:
-access_token = "4344~PzZ13RQj9GIZnBSQFPkgswwyvQM31DxcYICihbcLg7O3gZj9nAaXgMJeFVewV2QM"# nil
-domain = "bbroderick" #nil
+access_token = nil
+domain = nil
 env = nil
-input_file = "./in.csv" #nil
-output_file = "./out.csv" #nil
+input_file = nil
+output_file = nil
 #============
 # Don't edit from here down unless you know what you're doing.
 
