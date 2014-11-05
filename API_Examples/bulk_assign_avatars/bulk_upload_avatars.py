@@ -62,8 +62,8 @@ def log(str_or_obj):
 for user_image in csv_file_reader:
   #file_id = 47467288 
   file_id = None
-  # Step 1: Start upload file to user's file storage in Canvas
 
+  # Step 1: Start upload file to user's file storage in Canvas
   inform_api_url = "https://{domain}/api/v1/users/self/files".format(domain=domain)
   image_path = '{0}{1}{2}'.format(working_path,images_path,user_image['image_filename'])
   mime_type,encoding = mimetypes.guess_type(image_path)
