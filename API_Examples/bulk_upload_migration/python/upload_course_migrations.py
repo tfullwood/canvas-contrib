@@ -87,6 +87,19 @@ except:
       print value
       self._label = value
 
+# Logging Stuff
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                    datefmt='%m-%d %H:%M')
+rootLogger = logging.getLogger('upload_course_migrations')
+rootLogger.addHandler(logging.FileHandler(logFilePath))
+
+console = logging.StreamHandler()
+formatter = logging.Formatter('%(message)s')
+# tell the handler to use this format
+console.setFormatter(formatter)
+rootLogger.addHandler(console)
+
 # Try loading local config variables from a file called local_config.py.  This file will
 # not be in the folder by default.  Rather, it will a file created by the developer.  This
 # would really be a special case.
@@ -255,17 +268,7 @@ def prep_row(row):
   destination_id = row.get(destination_course_id_column,None)
   return source_id,destination_id
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%m-%d %H:%M')
-rootLogger = logging.getLogger('upload_course_migrations')
-rootLogger.addHandler(logging.FileHandler(logFilePath))
 
-console = logging.StreamHandler()
-formatter = logging.Formatter('%(message)s')
-# tell the handler to use this format
-console.setFormatter(formatter)
-rootLogger.addHandler(console)
 
 if __name__ == '__main__':
   rootLogger.info("Log File: {}".format( logFilePath))
