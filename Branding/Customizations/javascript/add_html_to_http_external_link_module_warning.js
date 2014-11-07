@@ -6,5 +6,5 @@
 *   .append to .html
 */
 $(document).ready(function(){
-  $('#insecure_content_msg').append('<p>Put your html here</p>')
+  $('#insecure_content_msg.alert.alert-error').append('<p>Put your html here</p>')
 });
