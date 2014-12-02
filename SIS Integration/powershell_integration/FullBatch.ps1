@@ -1,5 +1,6 @@
 # This script allows full batch imports. To use the script you need to name the input .zip
 # file with the SIS ID of the destination term in Canvas. The SIS ID is case sensative!
+# The PowerShell community extensions are not required for this sample.
 
 $sourcePath = "c:\some\path\to\script\input\" #this is source directory literal path
 $archivePath = "c:\some\path\to\script\archive\" #output path for the zip file creation
