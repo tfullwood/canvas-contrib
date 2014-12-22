@@ -45,7 +45,7 @@ if($file_list.length -gt 0){
 
         ###### Some functions
 
-        $status_log_path = $logPath+$tfile+"-"+$t+"-status.log"
+        $status_log_path = $logPath+$term+"-"+$t+"-status.log"
         Try {
             $results1 = (Invoke-WebRequest -Headers $headers -InFile $inFile -Method POST -ContentType $contentType -Uri $url) #-PassThru -OutFile $outputPath$t"-status.log"
             $results1.Content | Out-File $status_log_path
