@@ -4,8 +4,10 @@ import json,csv,os
 import collections
 import time,logging
 import requests
-import pprint
 from multiprocessing import Pool
+from logging.handlers import RotatingFileHandler
+import itertools, sys
+import zipfile
 
 """
  You will need to edit several variables here at the top of this script.
@@ -69,7 +71,11 @@ process_type = 'upload' # options are 'upload' or 'link'
 # of the file.  That is assuming the file has headers.  It should always have them.
 #
 
+spinner = itertools.cycle(['-', '/', '|', '\\'])
+
 try:
+  # NOTE - if you install the clint pypi library you will get a nice progress
+  # bar during script execution.
   from clint.textui.progress import Bar
 except:
   class Bar(object):
@@ -93,26 +99,25 @@ except:
 try:
   from local_config import *
 except:
-  print 'local config file not found'
+  print "local config file not found. That's okay, it just means you will have modified the variables at the top of this file."
 
-if "/" in CSVFileName:
-   rootLogger.info("The CSVFilename should not contain forwardslashed.  You are warned")
 
-course_copy_queue = []
 headers = {"Authorization":"Bearer %s" % token}
 
 def massDoCopies(data):
   # data[1] is the row of data, in the form of a list
+
   row_data = data[1]
 
   # data[0] is the progress bar object  
   prog_bar = data[0]
   prog_bar.label = 'doing copy: {}'.format(row_data)
 
+  logger_prefix = '{0[destination_id]}:{0[source_id]}'.format(row_data)
   file_path = os.path.join(workingPath,row_data['source_id'])
   rootLogger.debug(row_data)
   course_search_url = "https://{}/api/v1/courses/{}".format(canvas_domain,row_data['destination_id'])
-  rootLogger.info('looking for course: {}'.format(course_search_url))
+  rootLogger.info('{} looking for course: {}'.format(logger_prefix,course_search_url))
 
   done_finding = False
   found_course = {}
@@ -123,22 +128,38 @@ def massDoCopies(data):
     except:
       pass
   if not found_course.get('id',None):
-    rootLogger.error('course {} {}'.format(row_data['destination_id'], 'not found'))
+    rootLogger.error('{} course {} {}'.format(logger_prefix,row_data['destination_id'], 'not found'))
   else:
-    rootLogger.info('course found {}'.format(found_course))
+    rootLogger.info('{} course found {}'.format(logger_prefix,found_course))
     prog_bar.label = 'course found {}'.format(row_data['destination_id'])
 
     params = {
       'migration_type':migration_type
     }
     if process_type == 'upload':
+      # Course quota size checking
+      z = zipfile.ZipFile(open(file_path,'rb'))
+      uncompress_size_mb = sum((file.file_size for file in z.infolist()))/1000000.0
+      # Get course quota via api
+      # Get the course used quota
+      #/api/v1/courses/:course_id/files/quota
+      course_quota_url = "https://{}/api/v1/courses/{}/files/quota".format(canvas_domain,row_data['destination_id'])
+      course_quota_info = requests.get(course_quota_url,headers=headers).json()
+      # if it isn't large enough for the unzipped
+      # files then increase it to current usage + uncompress_size + 50%
+      if not ((course_quota_info['quota'] - course_quota_info['quota_used'])/1000000.0) > uncompress_size_mb:
+        # Increase the space needed
+        update_course_data = {'course[storage_quota_mb]':course_quota_info['quota']+uncompress_size_mb}
+        course_quota_info = requests.put(course_search_url,data=update_course_data,headers=headers).json()
+
+      # TODO Pre-upload content package checking according to the type.
+      # TODO Get list of common errors from Tdoxey
       params['pre_attachment']={
         'name': row_data['source_id'],
         'name':row_data['source_id'],
         'size':os.path.getsize(file_path), # read the filesize
         'content_type':'application/zip',
        }
-      rootLogger.info('='*25+' hello ')
     elif process_type == 'copy':
       # set the source course field
       params['settings'] = {'source_course_id':row_data['source_id']}
@@ -146,11 +167,17 @@ def massDoCopies(data):
       # set the url field
       params['settings'] = {'file_url':row_data['source_id']}
 
-    rootLogger.info(params)
+    rootLogger.info('{} {}'.format(logger_prefix,params))
+
 
     headers_post = {'Authorization':headers['Authorization'],'Content-type':'application/json'}
     uri = "https://{}/api/v1/courses/{}/content_migrations".format(canvas_domain,row_data['destination_id'])
-    rootLogger.info('uri: {}'.format(uri))
+    rootLogger.info('{} uri: {}'.format(logger_prefix,uri))
+
+    print 'params',params
+    print 'headers',headers_post
+    print 'uri',uri
+
     migration = requests.post(uri,headers=headers_post,data=json.dumps(params))
     migration_json = migration.json()
     #result = requests.post(uri,headers=headers,params=params)
@@ -158,31 +185,35 @@ def massDoCopies(data):
     rootLogger.debug(migration.json())
     if process_type=='upload':
       prog_bar.label = 'done triggering course copy, now check status'
-      rootLogger.info("Done prepping Canvas for upload, now sending the data...")
+      rootLogger.info("{} Done prepping Canvas for upload, now sending the data...".format(logger_prefix))
       json_res = json.loads(migration.text,object_pairs_hook=collections.OrderedDict)
 
 
       # Step 2:  Upload data
-      # TODO
       files = {'file':open(file_path,'rb').read()}
       
       _data = json_res['pre_attachment'].items()
+      if _data[1][0]=='error':
+          #print _data[1]
+          rootLogger.info("{} {} - There was a problem uploading the file.  Probably a course quota problem.".format( row_data['destination_id'], row_data['source_id']))
+          row_data['errors'] = _data[1][0]
+          return row_data
+
       _data[1] = ('upload_params',_data[1][1].items())
 
-      rootLogger.info("Yes! Done sending pre-emptive 'here comes data' data, now uploading the file...")
+      rootLogger.info("{} Yes! Done sending pre-emptive 'here comes data' data, now uploading the file...".format(logger_prefix))
       upload_file_response = requests.post(json_res['pre_attachment']['upload_url'],data=_data[1][1],files=files,allow_redirects=False)
 
       # Step 3: Confirm upload
 
-      rootLogger.info("Done uploading the file, now confirming the upload...")
+      rootLogger.info("{} Done uploading the file, now confirming the upload...".format(logger_prefix))
       confirmation = requests.post(upload_file_response.headers['location'],headers=headers)
 
       if 'id' in confirmation.json():
         file_id = confirmation.json()['id'] 
       else:
-        print 'no id here'
-        rootLogger.error(confirmation.json())
-      rootLogger.info("upload confirmed...nicely done! The Course migration should be starting soon.")
+        rootLogger.error('{} {}'.format(logger_prefix,confirmation.json()))
+      rootLogger.info("{} upload confirmed...nicely done! The Course migration should be starting soon.".format(logger_prefix))
 
       migration_json = requests.get('https://{}/api/v1/courses/{}/content_migrations/{}'.format(canvas_domain,row_data['destination_id'],migration_json['id']),headers=headers).json()
 
@@ -190,7 +221,6 @@ def massDoCopies(data):
     output = "\r\n" + migration.text
     rootLogger.debug(output)
 
-    pprint.pprint(migration_json)
     prog_url = migration_json['progress_url']
     if wait_till_done:
       status = requests.get(prog_url,headers=headers).json()
@@ -202,44 +232,42 @@ def massDoCopies(data):
             status = requests.get(prog_url,headers=headers).json()
             done_statusing = True
           except Exception, err:
-            rootLogger.error(err)
+            rootLogger.error('{} {}'.format(logger_prefix,err))
 
         if status['completion']!=last_progress:
-          rootLogger.info("{} {}".format(status['workflow_state'],status['completion']))
+          rootLogger.debug("{} {}".format(status['workflow_state'],status['completion']))
           last_progress = status['completion']
-      rootLogger.info("{} {}".format(status['workflow_state'],status['completion']))
+      if status['workflow_state']=='failed':
+          rootLogger.info("{} - {} - {} {}".format(canvas_domain,row_data['destination_id'],status['workflow_state'],status['completion']))
+          rootLogger.info("{} - {} - migration issues: {}".format(canvas_domain,row_data['destination_id'],migration_json['migration_issues_url']))
+          rootLogger.debug(requests.get(migration_json['migration_issues_url'],headers=headers).text)
+      else:
+          rootLogger.info("{} - {} - {} {}".format(canvas_domain,row_data['destination_id'],status['workflow_state'],status['completion']))
     #copyCache['sources'][source_id].append(csvrow[destination_course_id_column])
     #rootLogger.info('all done')
   return row_data
 
 def runMigrations(copies):
-  pool = Pool(processes=num_processes)
-  #copies.reverse()
+    pool = Pool(processes=num_processes)
+    #copies.reverse()
 
-  bar = Bar()
-  res = pool.map(massDoCopies,((bar,x) for x in copies))
-  #for x in copies:
-  #  massDoCopies((bar,x))
+    bar = Bar()
+    #res = pool.map(massDoCopies,((bar,x) for x in copies))
+    #for x in copies:
+    #  massDoCopies((bar,x))
 
-CSVFilePath = os.path.join(workingPath, CSVFileName)
-archivePath = os.path.join(workingPath, "archives")
-logPath = os.path.join(workingPath, "logs")
+    res = pool.map_async(massDoCopies, ((bar,x) for x in copies))
+    stats = []
+    try:
+        stats.append(res.get(0xFFFF))
+    except KeyboardInterrupt:
+        print 'kill processes'
+        #pool.terminate()
+        exit()
+    except TypeError, err:
+        print 'err',err
+        pass
 
-timestamp = time.strftime("%y_%m_%d_%h")
-logFilePath = os.path.join(logPath,timestamp + ".log")
-# Create several paths that are needed for the script to run.
-# These paths may exist already, but this is a check
-if not os.path.exists(archivePath):
-    os.mkdir(archivePath)
-if not os.path.exists(logPath):
-    os.mkdir(logPath)
-try:
-  os.utime(logFilePath, None)
-except:
-  open(logFilePath, 'a').close()
-
-
-t = time.strftime("%Y%m%d_%H:%M:%S")
 
 def UnicodeDictReader(utf8_data, **kwargs):
   csv_reader = csv.DictReader(utf8_data, **kwargs)
@@ -247,28 +275,46 @@ def UnicodeDictReader(utf8_data, **kwargs):
     yield dict([(key, unicode(value, 'utf-8')) for key, value in row.iteritems()])
 
 def prep_row(row):
-
+  print 'process_type',process_type
   if process_type == 'link' and migration_base_url:
     source_id = migration_base_url + row.get(source_archive_filename_column,None)
   else:
-    source_id = row.get(source_archive_filename_column,"no url given")
+    source_id = row.get(source_archive_filename_column,"no source course given or column not found")
   destination_id = row.get(destination_course_id_column,None)
   return source_id,destination_id
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%m-%d %H:%M')
-rootLogger = logging.getLogger('upload_course_migrations')
-rootLogger.addHandler(logging.FileHandler(logFilePath))
-
-console = logging.StreamHandler()
-formatter = logging.Formatter('%(message)s')
-# tell the handler to use this format
-console.setFormatter(formatter)
-rootLogger.addHandler(console)
 
 if __name__ == '__main__':
+
+  course_copy_queue = []
+  CSVFilePath = os.path.join(workingPath, CSVFileName)
+  logPath = os.path.join(workingPath, "logs")
+
+  timestamp = time.strftime("%y_%m_%d_%h")
+  # Create several paths that are needed for the script to run.
+  # These paths may exist already, but this is a check
+  if not os.path.exists(logPath):
+      os.mkdir(logPath)
+
+  logFilePath = os.path.join(logPath,timestamp + ".log")
+
+  t = time.strftime("%Y%m%d_%H:%M:%S")
+
+  # TODO There is probably a better place to put this stuff that right here
+  logging.basicConfig(level=logging.INFO,
+                      format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                      datefmt='%m-%d %H:%M')
+  rootLogger = logging.getLogger('upload_course_migrations')
+  rootLogger.addHandler(logging.FileHandler(logFilePath))
+
+  logging.getLogger("requests").setLevel(logging.WARNING)
+  # Rotate the log files
+  #handler = RotatingFileHandler(logFilePath, maxBytes=1000000, backupCount=5)
   rootLogger.info("Log File: {}".format( logFilePath))
+
+  if CSVFileName[-1] == '/':
+      rootLogger.info("The CSVFilename should not end in a forward slash.  You are warned")
+
   if not os.path.exists(CSVFilePath):
     rootLogger.info('CSVFilePath: {}'.format(CSVFilePath))
     rootLogger.info("`r`n " + t +":: There was no CSV file.  I won't do anything")
@@ -285,5 +331,5 @@ if __name__ == '__main__':
     runMigrations(course_copy_queue)
 
   for h in rootLogger.handlers[:]:
-    h.close()
-    rootLogger.removeHandler(h)
+      h.close()
+      rootLogger.removeHandler(h)

@@ -2,7 +2,7 @@ Sub SendImport(strFileName As String)
  
         Dim result As String = ""
         Dim url As String = "<insert your base url here>"
-        url += "/api/v1/accounts/" + <enter your account here, or the word self> + "/sis_imports.json" + "?import_type=instructure_csv"
+        url += "/api/v1/accounts/self/sis_imports.json" + "?import_type=instructure_csv"
         Dim token As String = "<insert your token string here>"
  
         Try
