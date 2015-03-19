@@ -10,7 +10,7 @@ from pprint import pprint
 access_token = '<MY_TOKEN>' # your access token
 modules_csv = 'modules.csv' # name of file storing module names
 log_file = 'log.txt' # a log file. it will log things
-baseUrl = 'myschool.instructure.com' # domain of your Canvas account
+baseUrl = 'https://myschool.instructure.com/api/v1/courses/' # change to domain of your Canvas account
 header = {'Authorization' : 'Bearer ' + access_token}
 payload = {}
 
