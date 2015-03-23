@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
 import csv
-import sys
+import os,sys
 import time
 from democoursedata import course_data
 from random import choice
 from random_sources import first_names,last_names
 import requests
+import StringIO
 
 class DemoMaker(object):
   #user_fieldnames = ('user_id','login_id','password','email','status')
@@ -37,10 +38,19 @@ class DemoMaker(object):
 
 
   names_list = []
-  def __init__(self,num_users=10,num_courses=1):
+  def __init__(self,num_users=10,num_courses=1,filepath=None):
     self.num_courses = int(num_courses)
     self.num_users = (self.num_courses * 3) + int(num_users)
     self.runtime = int(time.mktime(time.localtime())) 
+    if filepath:
+        if not os.path.exists(filepath):
+            print "filepath {} does not exist".format(filepath)
+        if not os.path.exists(os.path.join(filepath,'create')):
+            os.mkdir(os.path.join(filepath,'create'))
+        if not os.path.exists(os.path.join(filepath,'delete')):
+            os.mkdir(os.path.join(filepath,'delete'))
+
+    self.filepath = filepath
 
     print 'Building %s courses with %s users' % (self.num_courses,self.num_users)
 
@@ -64,8 +74,12 @@ class DemoMaker(object):
     return random_course
 
   def setFile(self,wr_type):
-    self.data[wr_type]['create'].setdefault('file',open('./output/create/%s.csv'%wr_type,'wt'))
-    self.data[wr_type]['delete'].setdefault('file',open('./output/delete/%s.csv'%wr_type,'wt'))
+    if self.filepath:
+        self.data[wr_type]['create'].setdefault('file',open('{}/create/{}.csv'.format(self.filepath,wr_type),'wt'))
+        self.data[wr_type]['delete'].setdefault('file',open('{}/delete/{}.csv'.format(self.filepath,wr_type),'wt'))
+    else:
+        self.data[wr_type]['create'].setdefault('file',StringIO.StringIO(''))
+        self.data[wr_type]['delete'].setdefault('file',StringIO.StringIO(''))
 
   def setWriter(self,wr_type):
 
@@ -99,8 +113,6 @@ class DemoMaker(object):
 
   def setupDemo(self):
     # First create users
-    #writer = csv.DictWriter(user_file,fieldnames=user_fieldnames)
-    #writer.writerow(user_headers)
     for x in xrange(0,int(self.num_users)):
       user_id = self.data['user']['id_pattern'] % (self.runtime,x)
       user = dict(
@@ -199,17 +211,19 @@ class DemoMaker(object):
         role = 'student',
         status = 'active'))
     
-    self.writeFiles()
+    #self.writeFiles()
     print "created %d courses and %d users. The password for users is %s" % (self.num_courses,self.num_users,self.runtime)
 
-from optparse import OptionParser
-parser = OptionParser()
-parser.add_option("-c", "--courses", dest="num_courses",
-                  help="number of courses", default=1,metavar="FILE")
-parser.add_option("-u", "--users",
-                  dest="num_users", default=10,
-                  help="number of users")
+if __name__ == '__main__':
+    from optparse import OptionParser
+    parser = OptionParser()
+    parser.add_option("-c", "--courses", dest="num_courses",
+                      help="number of courses", default=1,metavar="FILE")
+    parser.add_option("-u", "--users",
+                      dest="num_users", default=10,
+                      help="number of users")
 
-(options, args) = parser.parse_args()
-d = DemoMaker(options.num_users,options.num_courses)
-d.setupDemo()
+    (options, args) = parser.parse_args()
+    d = DemoMaker(options.num_users,options.num_courses,filepath='./output/')
+    d.setupDemo()
+    d.writeFiles()

@@ -8,3 +8,4 @@ API_Examples/bulk_set_course_tabs/logs
 local_config.py
 *.zip
 *.log
+.coverage

@@ -1,19 +1,23 @@
 #!/usr/bin/env python
+domain = "<yourdomain>.instructure.com"
+token = "<access_token>"
+
+####################################################################################################
+####################################################################################################
+############### Don't edit anything after this point unless you know what you
+############### are doing. You may know what you are doing, I don't know, but be aware that
+############### everything past this point is breakable. You know the "You break it
+############### you buy it" kind of thing.
+####################################################################################################
+####################################################################################################
 
 import requests,json
 import argparse
 import sys,os
 import csv
-# Prepare argument parsing
-parser = argparse.ArgumentParser()
-parser.add_argument('--outcomesfile',required=True,help='path to the outcomes.csv file')
 
-domain = "<yourschool>.instructure.com"
-token = "<access_token>"
+
 headers = {'Authorization': 'Bearer %s' % token}
-#outcomes_fieldnames = ('outcome_id','title','description','mastery_level')
-#ratings_fieldnames = ('outcome_id','label','points')
-
 vendor_guid_cache = {'outcome_groups':{},'outcomes':{}}
 
 def checkFileReturnCSVReader(file_name,d=False):
@@ -125,12 +129,12 @@ def createOutcomeGroup(vendor_guid,name,description,parent_id):
   return vendor_guid_cache['outcome_groups'][vendor_guid]
 
 def getOrCreateOutcome(group_id,title,description,vendor_guid,mastery_points,ratings):
+  if not vendor_guid_cache['outcomes'].get(vendor_guid,None):
+    for outcome in paginated_outcomes(group_id):
+      vendor_guid_cache['outcomes'][outcome['vendor_guid']] = outcome
     if not vendor_guid_cache['outcomes'].get(vendor_guid,None):
-        for outcome in paginated_outcomes(group_id):
-            vendor_guid_cache['outcomes'][vendor_guid] = outcome
-        if not vendor_guid_cache['outcomes'].get(vendor_guid,None):
-            vendor_guid_cache['outcomes'][vendor_guid] = createOutcome(group_id,title,description,vendor_guid,mastery_points,ratings)
-    return vendor_guid_cache['outcomes'][vendor_guid]
+      vendor_guid_cache['outcomes'][vendor_guid] = createOutcome(group_id,title,description,vendor_guid,mastery_points,ratings)
+  return vendor_guid_cache['outcomes'][vendor_guid]
 
 def createOutcome(group_id,title,description,vendor_guid,mastery_points,ratings):
   path = "/api/v1/accounts/self/outcome_groups/%s/outcomes" % group_id
@@ -147,6 +151,9 @@ def createOutcome(group_id,title,description,vendor_guid,mastery_points,ratings)
   return res.json()
 
 
+# Prepare argument parsing
+parser = argparse.ArgumentParser()
+parser.add_argument('--outcomesfile',required=True,help='path to the outcomes.csv file')
 if __name__ == '__main__':
     args = parser.parse_args()
     outcomes_file = checkFileReturnCSVReader(args.outcomesfile)
@@ -154,7 +161,7 @@ if __name__ == '__main__':
       outcomes = {}
       outcome_data = {}
       for outcome_row in outcomes_file:
-
+        
         if outcome_row[0]=="outcome_id":
           # TODO need to make sure this can be a non-canvas id
           outcome_data['rating_levels'] = outcome_row[5:]
@@ -171,6 +178,7 @@ if __name__ == '__main__':
             print 'OutcomeGroup not found',outcome['outcome_group']
           else:
             outcome['outcome_group_id'] = og['id']
+            print 'outcome_to_create',outcome['id']
             print "Outcome", getOrCreateOutcome(outcome['outcome_group_id'],
                 outcome['name'],
                 outcome['description'],
