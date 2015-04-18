@@ -8,6 +8,7 @@ $(document).ready(function() {
 	//Menu Item Support
 	//Change link to the name of your link
 	var link = $('<li/>', {
+		'id': 'custom_menu_item',
 		'class': 'menu-item',
 		html: '<a class="menu-item-title" href="/">Toolbox<span class="menu-item-title-icon"></span></a><div class="menu-item-drop"><table cellspacing="0"><tbody><tr><td class="menu-item-drop-column">'+
 		'<ul class="menu-item-drop-column-list">'+
@@ -19,6 +20,7 @@ $(document).ready(function() {
 	});
 	//Change link1 to the name of your link
 	var link1 = $('<li/>', {
+		'id': 'custom_menu_item_1',
 		'class': 'menu-item',
 		html: '<a class="menu-item-title" href="/">Link<span class="menu-item-title-icon"></span></a><div class="menu-item-drop"><table cellspacing="0"><tbody><tr><td class="menu-item-drop-column">'+
 		//Title in dropdown menu
@@ -31,4 +33,3 @@ $(document).ready(function() {
 	});
 	menu.append(link).append(link1);
 })();
-
