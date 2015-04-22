@@ -1,5 +1,5 @@
 /*
- * Use this to remove the Delete Course, Conclude Coures, and Reset Course Content 
+ * Use this to remove the Delete Course, Conclude Course, and Reset Course Content 
  * Buttons from Canvas if you are a teacher
  */
 
