@@ -1,3 +1,8 @@
+Hide right side navigation
+======
+
+This will hide the right hand side panel when a user is not logged into Canvas, and the course is publicly accessible.
+
 Support
 ======
 

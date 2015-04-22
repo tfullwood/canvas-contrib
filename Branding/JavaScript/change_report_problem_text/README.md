@@ -1,3 +1,8 @@
+Change Report Problem Text
+======
+
+This script will allow you to change the text & sub-text on the Report a Problem in the help menu of Canvas.
+
 Support
 ======
 

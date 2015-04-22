@@ -1,10 +1,7 @@
-HTML Module Warnings
+Additional Footer Links
 ======
 
-This script appends information to the warning box displayed when an HTTP:// external link is used for a module item in Canvas.
-
-*Note:* To replace the content instead of appending change the .append to .html
-
+Adds a link to the end of the footer in Canvas.
 
 Support
 ======

@@ -1,3 +1,8 @@
+Hide Password Link in Settings
+======
+
+This script will hide the password change option that appears in settings for students. Teachers, admins, and observers will still have the ability to change the password.
+
 Support
 ======
 

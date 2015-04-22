@@ -1,3 +1,10 @@
+Change Left Hand Navigation Text
+======
+
+Allows you to change the left hand navigation names to something more relevant.
+
+Such as Quizzes to Assessments.
+
 Support
 ======
 

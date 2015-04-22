@@ -1,3 +1,8 @@
+Bigger Thumbnails
+======
+
+This script will resize the thumbnails used for Youtube and Kaltura
+
 Support
 ======
 

@@ -15,5 +15,16 @@ Add the contents of load_this_file.js to your existing branding javascript file 
 as the branding javascript file if you don't have another file already.
 
 This script uses dust, a javascript templating library, to generate the HTML on the page.
-That is why the dust-core.min.js file is needed.  templates.js containes the compiled
+That is why the dust-core.min.js file is needed.  templates.js contains the compiled
 templates themselves.
+
+
+Support
+======
+
+This is an unsupported, community-created project. Keep that in
+mind. Instructure won't be able to help you fix or debug this.
+That said, the community will hopefully help support and keep
+both the script and this documentation up-to-date.
+
+Good luck!

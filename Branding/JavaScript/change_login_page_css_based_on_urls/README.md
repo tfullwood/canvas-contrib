@@ -1,3 +1,10 @@
+Different CSS for each Canvas Environment
+======
+
+This script will allow different CSS options for Prod, Test, & Beta. You will need to have separate CSS files for each instance.
+
+*Note:* This script will also allow you to change the forgot password link.
+
 Support
 ======
 

@@ -1,3 +1,9 @@
+Hide Course Options
+======
+
+Hide the "Make this course publicly visible" and "Make the syllabus for this course publicly visible" hidden for non-admins
+
+
 Support
 ======
 

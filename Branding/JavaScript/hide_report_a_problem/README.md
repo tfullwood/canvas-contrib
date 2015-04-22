@@ -1,3 +1,8 @@
+Hide Report a Problem Link
+======
+
+This script will hide the report a problem when the help dialog button is clicked.
+
 Support
 ======
 

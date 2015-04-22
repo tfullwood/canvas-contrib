@@ -1,3 +1,8 @@
+Hide Options for Teachers in a Course
+======
+
+Use this to remove the Delete Course, Conclude Course, and Reset Course Content Buttons from Canvas if you are a teacher
+
 Support
 ======
 

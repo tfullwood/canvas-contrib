@@ -1,3 +1,8 @@
+Change Enrollment Text
+======
+
+Changes the text on the enrollment page from "Please enter your email address:" to anything you specify.
+
 Support
 ======
 

@@ -1,3 +1,8 @@
+Global Navigation Links
+=====
+
+Adds multiple global navigation links to Canvas that contain items when hovering over, can be striped to use a single link as well.
+
 Support
 ======
 

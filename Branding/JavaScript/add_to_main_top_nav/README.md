@@ -1,3 +1,8 @@
+Global Navigation Link
+======
+
+Adds a single clickable link at the global navigation, with no dropdown options.
+
 Support
 ======
 

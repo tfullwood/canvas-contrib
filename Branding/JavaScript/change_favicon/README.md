@@ -1,3 +1,8 @@
+Change Favicon
+======
+
+This will change the favicon from the Canvas logo, to a new specified favicon.
+
 Support
 ======
 

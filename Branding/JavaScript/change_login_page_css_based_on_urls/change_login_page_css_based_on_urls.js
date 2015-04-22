@@ -9,17 +9,17 @@ $(document).ready(function() {
   logo.rel = 'stylesheet';
 
   if (window.location.hostname === "Production URL") {
-    logo.href = "URL to different CSS";
+    logo.href = "URL to different CSS"; //This should be a separate CSS meant for Prod
     head.appendChild(logo);
      }
 
   if (window.location.hostname === "Test URL") {
-    logo.href = "URL to different CSS";
+    logo.href = "URL to different CSS"; //This should be a separate CSS meant for Test
     head.appendChild(logo);
     }
 
   if (window.location.hostname === "Beta URL") {
-    logo.href = "URL to different CSS";
+    logo.href = "URL to different CSS"; //This should be a separate CSS meant for Beta
     head.appendChild(logo);
     }
 });

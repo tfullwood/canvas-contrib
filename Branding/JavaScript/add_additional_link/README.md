@@ -1,3 +1,6 @@
+Add additional link to login page
+======
+
 Add an additional change password link to the login screen.
 
 Support
