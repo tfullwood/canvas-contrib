@@ -1,3 +1,5 @@
+Add an additional change password link to the login screen.
+
 Support
 ======
 
