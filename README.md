@@ -40,3 +40,8 @@ Branding
 
 Branding includes many examples of using javascript and CSS to brand your instance of
 Canvas.  
+
+Plugins
+------
+
+Provides examples of some plugins that can be utilized within Canvas.

@@ -1,0 +1,25 @@
+.module-sequence-footer .module-sequence-footer-content {
+	text-align: center;
+}
+
+.module-sequence-footer-content .pull-left {
+	float: none;
+	display: inline-block;
+	font-size: 35px;
+}
+
+.module-sequence-footer-content .pull-right {
+	float: none;
+	display: inline-block;
+	font-size: 35px;
+}
+
+.module-sequence-footer a {
+	border-right: 1px solid #d4d6d9;
+	border-left: 1px solid #d4d6d9;
+}
+
+.module-sequence-footer a.bordered {
+	border-right: 1px solid #d4d6d9;
+	border-left: 1px solid #d4d6d9;
+}

@@ -1,6 +1,6 @@
 /*
  * You can use this script to add some text to the login screen just below the
- * login button and other items on the screen.  There appears to be room for about 
+ * login button and other items on the screen.  There appears to be room for about
  * 3 lines of text, or so.
  *
  * Edit the variable added_text to contain the text you want to add to the screen.

@@ -1,0 +1,4 @@
+/* This will remove a sub section of the notifcation preferences, in this example it is the third one down "Conversations" */
+#notification-preferences .table.notification-prefs-table.table.table-columns-striped.table-bordered:nth-child(3) {
+display: none;
+}
