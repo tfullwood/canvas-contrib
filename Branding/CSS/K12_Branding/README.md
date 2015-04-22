@@ -8,6 +8,12 @@ The file K12_Round_Icons.css will be used when not using the K12 specific functi
 The file K12_Canvas_Header.css will be used when using the Canvas K12 specific features, through Feature Flags on the account level.
 
 
+Setup
+=====
+
+You will want to host this behind a secure server (HTTPS), then copy the link (https://link.com/to/the/css/file.css) in the global CSS overrides at the root account, or specific sub-account you are branding.
+
+
 Support
 ======
 
