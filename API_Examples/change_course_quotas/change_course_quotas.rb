@@ -3,10 +3,10 @@ require 'csv'
 require 'json'
 
 ######################### Edit these variables ##########################
-access_token = '17~XbdzdOrRFF2hjpM76ToTf2WjE0qva69PYVPCVeNHorRM8hp8oGgw9v7QIRVPco39' 					#Access token for the user to run the API call
-domain = 'mrumery'					#Domain of the institution to run against ex. https://domain.instructre.com (use only the domain)
-env = 'beta' 					#Leave nil for prod, or enter test or beta
-csv_filename = '/Users/mrumery/Downloads/quotas.csv'			#Full path the CSV file
+access_token = '' 					#Access token for the user to run the API call
+domain = ''					#Domain of the institution to run against ex. https://domain.instructre.com (use only the domain)
+env = nil					#Leave nil for prod, or enter test or beta
+csv_filename = ''			#Full path the CSV file
 ########################### Do not edit past this line ##################
 
 default_headers = {"Authorization" => "Bearer #{access_token}"}
