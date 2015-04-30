@@ -8,6 +8,7 @@ from multiprocessing import Pool
 from logging.handlers import RotatingFileHandler
 import itertools, sys
 import zipfile
+from pprint import pprint
 
 """
  You will need to edit several variables here at the top of this script.
@@ -23,7 +24,7 @@ token = "<access_token>" # access_token
 workingPath = "/path/to/working/folder/"; # Important! Make sure this ends with a backslash
 CSVFileName = "csvfile.csv" # The name of the course copy CSV file.  Not the full path
 
-source_archive_filename_column = "source_filename"
+source_archive_filename_column = "source"
 canvas_domain = "yourdomain.test.instructure.com"  # Your Canvas domain.  Use the .test area at first
 
 destination_course_id_column = "destination_id"
@@ -104,6 +105,34 @@ except:
 
 headers = {"Authorization":"Bearer %s" % token}
 
+from poster.encode import multipart_encode
+from poster.streaminghttp import StreamingHTTPHandler, StreamingHTTPRedirectHandler, StreamingHTTPSHandler
+import urllib2
+
+def uploadFile(data,filename):
+
+  data['upload_params']['file'] = open(filename, "rb")
+
+  #_data = data.items()
+  #_data[1] = ('upload_params',_data[1][1].items())
+
+  handlers = [StreamingHTTPHandler, StreamingHTTPSHandler]
+  opener = urllib2.build_opener(*handlers)
+  urllib2.install_opener(opener)
+
+  datagen, headers = multipart_encode(data['upload_params'])
+
+  #print 'pp: data[file]',data['file']
+  request = urllib2.Request(data['upload_url'], datagen,headers)
+  result = urllib2.urlopen(request)
+
+  response = json.load(result)
+  response.update( dict(
+    status=result.getcode(),
+    headers=result.info()))
+  return response
+
+
 def massDoCopies(data):
   # data[1] is the row of data, in the form of a list
 
@@ -174,17 +203,12 @@ def massDoCopies(data):
     uri = "https://{}/api/v1/courses/{}/content_migrations".format(canvas_domain,row_data['destination_id'])
     rootLogger.info('{} uri: {}'.format(logger_prefix,uri))
 
-    print 'params',params
-    print 'headers',headers_post
-    print 'uri',uri
-
     migration = requests.post(uri,headers=headers_post,data=json.dumps(params))
     migration_json = migration.json()
-    #result = requests.post(uri,headers=headers,params=params)
 
     rootLogger.debug(migration.json())
     if process_type=='upload':
-      prog_bar.label = 'done triggering course copy, now check status'
+      prog_bar.label = 'done triggering course copy, now uploading'
       rootLogger.info("{} Done prepping Canvas for upload, now sending the data...".format(logger_prefix))
       json_res = json.loads(migration.text,object_pairs_hook=collections.OrderedDict)
 
@@ -194,7 +218,6 @@ def massDoCopies(data):
       
       _data = json_res['pre_attachment'].items()
       if _data[1][0]=='error':
-          #print _data[1]
           rootLogger.info("{} {} - There was a problem uploading the file.  Probably a course quota problem.".format( row_data['destination_id'], row_data['source_id']))
           row_data['errors'] = _data[1][0]
           return row_data
@@ -202,19 +225,12 @@ def massDoCopies(data):
       _data[1] = ('upload_params',_data[1][1].items())
 
       rootLogger.info("{} Yes! Done sending pre-emptive 'here comes data' data, now uploading the file...".format(logger_prefix))
-      upload_file_response = requests.post(json_res['pre_attachment']['upload_url'],data=_data[1][1],files=files,allow_redirects=False)
+      upload_file_response = uploadFile(json_res['pre_attachment'],file_path)
 
       # Step 3: Confirm upload
 
       rootLogger.info("{} Done uploading the file, now confirming the upload...".format(logger_prefix))
-      confirmation = requests.post(upload_file_response.headers['location'],headers=headers)
-
-      if 'id' in confirmation.json():
-        file_id = confirmation.json()['id'] 
-      else:
-        rootLogger.error('{} {}'.format(logger_prefix,confirmation.json()))
-      rootLogger.info("{} upload confirmed...nicely done! The Course migration should be starting soon.".format(logger_prefix))
-
+      rootLogger.info("{} upload completed...nicely done! The Course migration should be starting soon.".format(logger_prefix))
       migration_json = requests.get('https://{}/api/v1/courses/{}/content_migrations/{}'.format(canvas_domain,row_data['destination_id'],migration_json['id']),headers=headers).json()
 
       
@@ -244,7 +260,8 @@ def massDoCopies(data):
       else:
           rootLogger.info("{} - {} - {} {}".format(canvas_domain,row_data['destination_id'],status['workflow_state'],status['completion']))
     #copyCache['sources'][source_id].append(csvrow[destination_course_id_column])
-    #rootLogger.info('all done')
+    rootLogger.info(last_progress)
+    rootLogger.info('all done')
   return row_data
 
 def runMigrations(copies):
@@ -256,6 +273,8 @@ def runMigrations(copies):
     #for x in copies:
     #  massDoCopies((bar,x))
 
+    print 'h2'
+    print 'copies',copies
     res = pool.map_async(massDoCopies, ((bar,x) for x in copies))
     stats = []
     try:
@@ -316,6 +335,7 @@ if __name__ == '__main__':
       rootLogger.info("The CSVFilename should not end in a forward slash.  You are warned")
 
   if not os.path.exists(CSVFilePath):
+    print 'hh'
     rootLogger.info('CSVFilePath: {}'.format(CSVFilePath))
     rootLogger.info("`r`n " + t +":: There was no CSV file.  I won't do anything")
   else:
