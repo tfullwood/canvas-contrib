@@ -5,9 +5,9 @@ For reference column headers must be
 parent_id,student_id
 '''
 
-myCsvFile = '/Users/kevin/Desktop/observer.csv' # Example: 'API_Testing/users_provisioning.csv'
-domain = 'kevin.instructure.com'
-token = '1~p4FW4DfznOqpftUVxoC5KFYRxi4ck0RMhriFmO1CydoIJwsjkp463EH73lq0XeCP' 
+myCsvFile = '/full/path/to/observer/csv/file.csv' # Example: 'API_Testing/users_provisioning.csv'
+domain = '<yourschool>.instructure.com'
+token = '<token_here>' 
 
 
 #### Don't edit past this unless you know what you're doing
@@ -22,3 +22,4 @@ with open(myCsvFile, 'rb') as csvFile:
     r = requests.put(baseUrl, headers = header)
     # Output progress to the console
     print r.json()
+
