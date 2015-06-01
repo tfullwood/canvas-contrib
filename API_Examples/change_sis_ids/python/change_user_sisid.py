@@ -10,8 +10,8 @@ old_user_id,new_user_id
 
 """
 
-filename = '/Users/kevin/Desktop/tmp/egc.correctusers.csv' # Change this to the file with the two columns
-domain = '<schoolname>.instructure.com' # Change this
+filename = '/path/to/file/users_to_change.csv' # Change this to the file with the two columns
+domain = 'yourcollege.instructure.com' # Change this
 token = 'tokenhere' # Change this
 
 
@@ -19,14 +19,16 @@ token = 'tokenhere' # Change this
 # Read CSV file
 
 headers = {'Authorization':'Bearer %s' % token}
-user_list = csv.DictReader(open(filename,'rb'))
+user_list = csv.DictReader(open(filename,'rU'))
 for user in user_list:
   # Get the logins for the user, find the one with the old SIS id, and change it
   url = 'https://%s/api/v1/users/sis_user_id:%s/logins' % (domain,user['old_user_id'])
 
-  login_response = requests.get(url,headers=headers)
-  logins = login_response.json()
-  if type(logins) != list:
+  logins = requests.get(url,headers=headers).json()
+  #logins = login_response.json()
+  #print logins
+  if not logins:
+    print 'logins',logins
     print "the user probably wasn't found, keep going"
 
   else:
@@ -38,7 +40,7 @@ for user in user_list:
           updated_login_response = requests.put(url,headers=headers,params=params)
           print updated_login_response.json()
       except Exception, exc:
-        print logins
+        print logins,exc
         print "The user probably wasn't found.  Keep going..."
 
 

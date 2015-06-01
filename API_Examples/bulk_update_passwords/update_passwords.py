@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 import csv, requests, json, time
 
 subdomain = '' # Example: 'myschool' in 'myschool.instructure.com

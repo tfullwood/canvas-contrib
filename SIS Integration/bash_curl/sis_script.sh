@@ -23,6 +23,8 @@ fi
 DIVIDER_START="#############################################################"
 DIVIDER="-------------------------------------------------------------"
 
+
+
 # Specify at least one argument
 if [ $# -lt 1 ] ; then
   echo "You must specify at least 1 argument."
@@ -62,37 +64,48 @@ done
 
 
 # This creates a zip file with all the .csv files in the source folder
-_date=`date "+%Y-%m-%d_%H-%M-%S"`
+_date=`date "+%Y-%m-%d_%H-%M"`
+# make a folder for this run
+echo "creating a folder for this import at $SOURCE_FOLDER/archive/$_date/"
+mkdir -p "$SOURCE_FOLDER/archive/$_date/"
+touch "$SOURCE_FOLDER/archive/$_date/log.txt"
+LOGFILE="$SOURCE_FOLDER/archive/$_date/log.txt"
+
+function echo_time() {
+  echo `date +'[%Y-%m-%d %H:%M] '` "$@"
+}
+
+function _log() {
+  echo_time "$1" | tee ${LOGFILE} 
+}
+
 
 zip_file="$SOURCE_FOLDER/$_date.zip"
 
 # If there are no CSV files to process, exit the script
 # This is based on a snippet from http://www.ducea.com/2009/03/05/bash-tips-if-e-wildcard-file-check-too-many-arguments/
 files=$(ls "$SOURCE_FOLDER/new/"*.csv 2> /dev/null | wc -l)
+
 if [ $files -eq 0 ]
 then
-  echo $DIVIDER
-  echo 'There are no csv files in $SOURCE_FOLDER/new/'; 
+  _log $DIVIDER
+  _log 'There are no csv files in $SOURCE_FOLDER/new/. I hereby declare that no SIS Import shall be executed.'; 
   exit 1
 else
-  echo "$files CSV files exist: do something with them"
+  _log "$files CSV files exist: do something with them"
 fi
 
-echo "creating $zip_file with $SOURCE_FOLDER/new/*.csv"
+_log "creating $zip_file with $SOURCE_FOLDER/new/*.csv"
 zip -q "$zip_file" "$SOURCE_FOLDER/new/"*.csv
 
-# make a folder for this run
-echo "creating a folder for this import at $SOURCE_FOLDER/archive/$_date/"
-mkdir -p "$SOURCE_FOLDER/archive/$_date/"
-
-#echo $json
+ $json
 
 # Bash function to pull out a json value.  This function is VERY tempermental.  If you
 # can, use the python parser.  It works with Python >= 2.6.  Did I say this function is
 # tempermental?
 function bashjsonval {
   temp=`echo $json | sed 's/\\\\\//\//g' | sed 's/[{}]//g' | awk -v k="text" '{n=split($0,a,","); for (i=1; i<=n; i++) print a[i]}' | sed 's/\"\:\"/\|/g' | sed 's/[\,]/ /g' | sed 's/\"//g' | grep -w $prop`
-  echo ${temp##*|}
+  _log ${temp##*|}
 }
 
 jsonval () {
@@ -101,6 +114,7 @@ jsonval () {
   read -r json_string
 
   if [ "$path_to_python_parser" = "" ]; then
+    #echo 'trying to call python'
     prop=$1
     local myresult=`bashjsonval`
     #echo "myresult $myresult"
@@ -113,68 +127,69 @@ jsonval () {
   echo $myresult
 }
 
-echo $DIVIDER
-echo "Starting the import...now"
-json=`curl -s -F attachment=@"$zip_file" -F "extension=zip" -F "import_type=instructure_csv" -H "Authorization: Bearer $access_token" "https://$domain.instructure.com/api/v1/accounts/self/sis_imports.json"`
+_log $DIVIDER
+_log "Starting the import...now"
+json=`curl -s -F attachment=@"$zip_file" -F "extension=zip" -F "import_type=instructure_csv" -H "Authorization: Bearer $access_token" "https://$domain.instructure.com/api/v1/accounts/self/sis_imports"`
 
-id=$(echo $json | jsonval id) 
-echo $DIVIDER
-echo "SIS Import ID: "  "$id"
+_log $DIVIDER
+echo $json | jsonval id
+id=$(echo $json | jsonval id)
+_log "SIS Import ID: "  "$id"
 
 # Do a check on the ID.  It should be a number, if it isn't then stop the script now
 # before anything bad :) happens
 if [ -z "${id##*[!0-9]*}" ]; then
-  echo "Something was wrong with the initial sis import...stopping now"
-  echo $json
+  _log "Something was wrong with the initial sis import...stopping now"
+  _log $json
   exit 1
 else
   #mv the *.csv files into a folder for this time and day
-  echo "Initial import was successfull, moving $SOURCE_FOLDER/new/"*.csv to "$SOURCE_FOLDER/archive/$_date/"
+  _log "Initial import was successfull, moving $SOURCE_FOLDER/new/"*.csv to "$SOURCE_FOLDER/archive/$_date/"
   mv "$SOURCE_FOLDER/new/"*.csv "$SOURCE_FOLDER/archive/$_date/"
 fi
 workflow_state=$(echo $json | jsonval workflow_state) 
 progress=$(echo $json | jsonval progress) 
 
 #echo $workflow_state
-echo "checking status at https://$domain.instructure.com/api/v1/accounts/self/sis_imports/$id"
+_log "checking status at https://$domain.instructure.com/api/v1/accounts/self/sis_imports/$id"
 while [[ $progress -lt 100 && $workflow_state != "imported" ]]; do
   sleep 3
   json=`curl -s -H "Authorization: Bearer $access_token" "https://$domain.instructure.com/api/v1/accounts/self/sis_imports/$id"`
   workflow_state=$(echo $json | jsonval workflow_state) 
   progress=$(echo $json | jsonval progress) 
-  echo "$workflow_state, $progress%"
+  _log "$workflow_state, $progress%"
 done
 
-echo $DIVIDER
-echo "Results are in"
-echo "The final Workflow State for this import is \"$workflow_state\""
+_log $DIVIDER
+_log "Results are in"
+_log "The final Workflow State for this import is \"$workflow_state\""
 if [[ $workflow_state = "imported_with_errors" ]];
 then
-  echo "Here are the errors"
+  _log "Here are the errors"
   errors=$(echo $json | jsonval errors) 
   # For some reason this is truncated when not using the python processor.  Why, I don't know.  let's just print
   # out the full $json for now
   if [ "$path_to_python_parser" = "" ]; then
-    echo $json
+    _log $json
   else
-    echo $errors
+    _log $errors
   fi
 
 fi
 if [[ $workflow_state = "imported_with_messages" ]];
 then
-  echo "Here are the messages"
+  _log "Here are the messages"
   messages=$(echo $json | jsonval processing_warnings) 
   # For some reason this is truncated when not using the python processor.  Why, I don't know.  let's just print
   # out the full $json for now
   if [ "$path_to_python_parser" = "" ]; then
-    echo $json
+    _log $json
   else
-    echo "warning messages: $messages"
+    _log "warning messages: $messages"
   fi
 fi
 
 # Move the zip file to the archive folder
-echo $DIVIDER
-echo "All done, now moving $zip_file to $SOURCE_FOLDER/archive/$_date/$_date.zip"
+_log $DIVIDER
+_log "All done, now moving $zip_file to $SOURCE_FOLDER/archive/$_date/$_date.zip"
 mv "$zip_file" "$SOURCE_FOLDER/archive/$_date/$_date.zip"
