@@ -6,12 +6,11 @@ from pprint import pprint
 
 
 # 1. Define inputs for the POST/GET request
-base_url = '<MY_BASE_URL>' # Example: https://ian.test.instructure.com/api/v1/accounts/'
-account_id = '<MY_ACCOUNT_ID>' # Example: 95298
-header = {'Authorization' : 'Bearer <MY_ACCESS_TOKEN>'}
+base_url = 'https://school.instructure.com/api/v1/accounts/self/' # Example: https://ian.test.instructure.com/api/v1/accounts/'
+header = {'Authorization' : 'Bearer <token>'}
 
 # Parameters specific to the initial POST request
-myfile = '<MY_FILE>' # Example: 'SIS_Testing/users.csv'
+myfile = '<file_path>' # Example: 'SIS_Testing/users.csv'
 payload = {'import_type' : 'instructure_csv', 'extension' : 'csv'}
 data = open(myfile, 'rb').read()
 
@@ -22,9 +21,9 @@ import_id = None
 # 2. Create a response object from the POST request
 def myrequest(base_url, header, payload, data):
 	if not import_id:
-		r = requests.post(base_url + account_id + "/sis_imports/", headers=header, params=payload, data=data)
+		r = requests.post(base_url + "/sis_imports/", headers=header, params=payload, data=data)
 	else:
-		r = requests.get(base_url + account_id + "/sis_imports/" + import_id, headers=header)
+		r = requests.get(base_url +  "/sis_imports/" + import_id, headers=header)
 	return r
 
 # 3. Pull JSON content from the response into a new JSON object

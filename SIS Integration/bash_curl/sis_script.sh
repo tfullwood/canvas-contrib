@@ -83,6 +83,7 @@ done
 shift $((OPTIND-1))
 
 echo 'loading config from $CONFIG_FILE_PATH'
+chmod +x $CONFIG_FILE_PATH
 . $CONFIG_FILE_PATH
 
 # TODO Check for required config variables
