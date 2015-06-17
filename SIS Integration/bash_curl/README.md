@@ -19,10 +19,13 @@ Installation steps:
 
   * copy the sis_script.sh file to a folder on the *nix system
     * Copy the "csv" folder to the same folder as the sis_script.sh
-  * edit sis_script.sh
-    * Change the access_token variable
-    * change the account_id variable
-    * change the domain variables
+  * Identify the name of the folder where you will export your CSV files to on a
+    regular basis.
+  * make a copy of sample_localconfig.sh and edit it
+    * change ACCESS_TOKEN 
+    * change DOMAIN
+    * change BASE_DIRECTORY 
+    * set CSV_FOLDER_NAME to the name of hte folder you identified previously
   * make the script executable
     * chmod +x sis_script.sh
 
@@ -30,11 +33,13 @@ Installation steps:
 Usage
 =====
 
-Create a crontab job to run regularly.  For example, to run this script hourly, you could
-create a job like the following:
+Create a crontab job to run regularly.  Open crontab by typing `crontab -e` in the command line.
 
-0 * * * * /path/to/sis_script.sh -e 
+For example, to run this script hourly, you could create a job like the following:
+
+0 * * * * /path/to/sis_script.sh -e production -f /path/to/localconfig.sh > /dev/null 2>&1
   
+The `> /dev/null 2>&1` part tells crontab to discard the output of the script. 
 
 
 Support
