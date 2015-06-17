@@ -67,11 +67,6 @@ right: 110px;
     padding: 5px 8px 5px 12px;
 }
 
-.list-view > ul > li, .list-view > nav > ul > li {
-    /*border-bottom: 1px solid black;*/
-    padding: 0;
-}
-
 /**********************************************
 ************* Navigation Icons ****************
 **********************************************/
@@ -392,6 +387,11 @@ a.context_external_tool_135::before {
      color: white;
 }
 @media screen and (max-width: 1024px) {
+}
+
+.list-view > ul > li, .list-view > nav > ul > li {
+    /*border-bottom: 1px solid black;*/
+    padding: 0;
 }
 
 /**********************************************
