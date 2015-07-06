@@ -5,9 +5,6 @@ import re,pprint
 
 # Change this to match your access token
 token="<access_token>"
-# This should be your account number.  This is the number you see when logged into canvas
-# as an admin.  i.e. https://schoolname.insructure.com/accounts/SOME_NUMBER_HERE
-ACCOUNT_ID = '88888'
 # Change this to match the domain you use to access Canvas.
 CANVAS_DOMAIN  = "<schoolname>.instructure.com"
 # Change this to the full path of your desired output folder.  I've set it to the current
@@ -31,8 +28,8 @@ do_groups = True
 ###################################################################################
 #### DON'T CHANGE anything after this unless you know what you are doing. #########
 BASE_DOMAIN = "https://%s/api/v1/%%s/" %  CANVAS_DOMAIN
-BASE_URI = BASE_DOMAIN % "accounts/%s/reports" % ACCOUNT_ID
-BASE_START_URI = BASE_DOMAIN % "accounts/%s/reports/%%s" % ACCOUNT_ID
+BASE_URI = BASE_DOMAIN % "accounts/self/reports" 
+BASE_START_URI = BASE_DOMAIN % "accounts/self/reports/%%s" 
 BASE_FILE_URI =  BASE_DOMAIN % "files/%s"
 
 # This headers dictionary is used for almost every request
