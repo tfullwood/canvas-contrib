@@ -1,0 +1,2 @@
+/* Hide default login label, so it doesn't visibly switch from one to the other with the JS */
+#login_form label[for=pseudonym_session_unique_id]>span { display: none; }

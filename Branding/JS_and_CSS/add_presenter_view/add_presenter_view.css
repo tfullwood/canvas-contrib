@@ -1,0 +1,39 @@
+/**********************************************
+** Add Presenter View (zoom main div; hide all other columns)
+**********************************************/
+/*Add custom classes for use with jQuery's addClass and removeClass methods*/
+.wmsDisplayNone
+{
+	display: none !important;
+}
+.wmsMarginZero
+{
+	margin: 0px !important;
+}
+.wmsPresenterExit
+{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background-color: #27ACD3;
+	cursor: pointer;
+	border: 1px solid #373737;
+	width: 20px;
+	height: 100%;
+	opacity: .7;
+}
+.wmsPresenterExit:hover
+{
+	opacity: 1;
+}
+/*Rotate text of "exit button"*/
+.wmsPresenterRotate {
+	position: absolute;
+	top: 350px;
+	-webkit-transform: rotate(-90deg);
+	-ff-transform: rotate(-90deg);
+	transform: rotate(-90deg); /*this rotates the internal text, not the bounding box*/
+	width: 20px;
+	font-weight: bold;
+	color: #000000;
+}
