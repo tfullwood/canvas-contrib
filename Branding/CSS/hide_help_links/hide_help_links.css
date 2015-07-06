@@ -14,7 +14,7 @@
 }
 
 /* Hide "Ask the Community" */
-#help-dialog-options a[href="http://help.instructure.com/forums/20225783-canvas-coach-q-a-site"] {
+#help-dialog-options a[href="https://community.canvaslms.com/community/answers"] {
   display:none !important;
 }
 
