@@ -17,8 +17,11 @@ import sys,os
 import csv
 
 
-headers = {'Authorization': 'Bearer %s' % token}
+def get_headers():
+  return {'Authorization': 'Bearer %s' % token}
+
 vendor_guid_cache = {'outcome_groups':{},'outcomes':{}}
+
 
 def checkFileReturnCSVReader(file_name):
   if file_name and os.path.exists(file_name):
@@ -29,15 +32,14 @@ def checkFileReturnCSVReader(file_name):
 def getRootOutcomeGroup():
   url = "https://%s/api/v1/accounts/self/root_outcome_group" % domain
   #print 'url',url
-  headers2 = {'Authorization': 'Bearer %s' % token}
-  return requests.get(url,headers=headers2,verify=False).json()
+  return requests.get(url,headers=get_headers(),verify=False).json()
 
 def paginated_outcomes(outcome_group_vendor_id=None):
   # Get outcomes
   all_done = False
   url = 'https://{0}/api/v1/accounts/self/outcome_groups/{1}/outcomes'.format(domain,outcome_group_vendor_id)
   while not all_done:
-    response = requests.get(url,headers=headers)
+    response = requests.get(url,headers=get_headers())
     for s in response.json():
       outcome = s['outcome']
       vendor_guid_cache['outcomes'].setdefault(outcome['vendor_guid'],outcome)
@@ -53,7 +55,7 @@ def paginated_outcome_groups():
   url = 'https://%s/api/v1/accounts/self/outcome_groups' % (domain)
   #params = {}
   while not all_done:
-    response = requests.get(url,headers=headers)
+    response = requests.get(url,headers=get_headers())
     for s in response.json():
       vendor_guid_cache['outcome_groups'].setdefault(s['vendor_guid'],s)
       yield s
@@ -69,7 +71,7 @@ def paginated_outcome_subgroups(parent_group_id):
   url = 'https://%s/api/v1/accounts/self/outcome_groups/%d/subgroups' % (domain,int(parent_group_id))
   #params = {}
   while not all_done:
-    response = requests.get(url,headers=headers)
+    response = requests.get(url,headers=get_headers())
     if not response.json():
       #yield []
       return
@@ -81,6 +83,7 @@ def paginated_outcome_subgroups(parent_group_id):
           vendor_guid_cache['outcome_groups'].setdefault(s['vendor_guid'],s)
           yield s
     if 'next' in response.links:
+      print response.links['next']
       url = response.links['next']['href']
     else:
       all_done = True
@@ -99,7 +102,7 @@ def findOutcomeGroup(outcome_group_vendor_id):
 
 def deleteOutcomeGroup(outcome_group_id):
   url = 'https://%s/api/v1/accounts/self/outcome_groups/%d' % (domain,outcome_group_id)
-  return requests.delete(url,headers=headers)
+  return requests.delete(url,headers=get_headers())
 
 def getOrCreateOutcomeGroup(outcome_group_vendor_id,name,description,parent_group_id=None):
   parent_group = None
@@ -123,7 +126,7 @@ def getOrCreateOutcomeGroup(outcome_group_vendor_id,name,description,parent_grou
 def createOutcomeGroup(vendor_guid,name,description,parent_id):
   url = 'https://%s/api/v1/accounts/self/outcome_groups/%d/subgroups' % (domain,parent_id)
   params = {'title':name,'description':description,'vendor_guid':vendor_guid}
-  vendor_guid_cache['outcome_groups'][vendor_guid] = requests.post(url,data=params,headers=headers).json()
+  vendor_guid_cache['outcome_groups'][vendor_guid] = requests.post(url,data=params,headers=get_headers()).json()
   return vendor_guid_cache['outcome_groups'][vendor_guid]
 
 #def getOrCreateOutcome(group_id,title,description,vendor_guid,mastery_points,ratings):
@@ -151,8 +154,22 @@ def createOutcome(outcome_to_create):
   '''
   headers = {'Authorization':'Bearer %s'%token,'Content-Type':'application/json'}
   url = 'https://%s%s' % (domain,path)
-  res = requests.post(url,headers=headers,data=json.dumps(outcome_to_create))
+  #data = json.dumps(outcome_to_create)
+  #print 'path',path,data
+  res = requests.post(url,headers=get_headers(),data=outcome_to_create)
   return res.json()
+
+def updateOutcome(outcome_to_update):
+  print 'outcome_to_update',outcome_to_update
+  path = "/api/v1/accounts/self/outcome_groups/%s/outcomes/%s" % (outcome_to_update['outcome_group']['id'],outcome_to_update['outcome']['id'])
+  headers = {'Authorization':'Bearer %s'%token,'Content-Type':'application/json'}
+  url = 'https://%s%s' % (domain,path)
+  #data = json.dumps(outcome_to_update['outcome'])
+  res = requests.put(url,headers=get_headers(),data=outcome_to_update)
+  del(vendor_guid_cache['outcomes'][outcome_to_update['outcome']['vendor_guid']])
+  return res.json()
+
+
 
 def isValidRow(row):
   return len(row) >=9
