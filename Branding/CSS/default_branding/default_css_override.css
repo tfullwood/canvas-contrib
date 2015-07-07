@@ -18,7 +18,7 @@ You can use .pngs with alpha transparency.*/
 
 /*replace the canvas logo with your logo */
 #header-logo {
-  background: url("") no-repeat scroll 0 0 transparent;
+  background: url() no-repeat scroll 0 0 transparent;
   top: 0px;
   bottom: 0px;
   left: 0px;
@@ -31,12 +31,16 @@ You can use .pngs with alpha transparency.*/
 
 /*if you replace the left canvas logo, move a smaller one to the right side of the header. include background-size to ensure it displays correctly on ipads*/
 #header-logo-secondary {
-  background-image: url("");
+  background-image: url();
 background-size: 120px 44px;
 display: block;
 top: 25px;
 height: 44px;
 right: 110px;
+}
+/*adds a watermark logo in the header box*/
+#header-inner{
+    background: transparent url() no-repeat center top;
 }
 
 /*keeps the width of the unauthorized banner the same size as the login page.*/
@@ -278,7 +282,7 @@ a.settings::before {
 **********************************************/
 /*replace the Canvas logo with your own*/
 body.modal #modal-box.login-box h1 {
-  background-image: url("");
+  background-image: url();
   background-repeat: no-repeat;
   background-position: center center !important;
   margin: 0px auto 0px;
@@ -290,7 +294,7 @@ body.modal #modal-box.login-box h1 {
 
 /* login image/background */
 #modal-box-inner{
-  background-image: url("");
+  background-image: url();
   background-repeat: no-repeat;
 }
 /* login image/background */
@@ -359,12 +363,12 @@ body.modal .btn-primary:hover, body.modal #modal-box .button:hover, body.modal #
 ************************************************/
 /* a small logo on the registration screen looks good */
 body.modal #modal-box h2{
-    background-image:url("") !important;
+    background-image:url() !important;
     background-size: 50px;
 }
 /* keep the default background for registration screens */
 #modal-box-inner{
-  background-image: url("");
+  background-image: url();
   background-repeat: no-repeat;
 }
 
