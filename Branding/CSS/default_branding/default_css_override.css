@@ -276,6 +276,21 @@ a.settings::before {
     border-bottom: 1px solid #cccccc;
     padding: 0;
 }
+/****************************************************
+******** Remove the login box on login page *********
+****************************************************/
+
+/*removes login box shawdow, used when removing the login box completely.*/
+/*
+body.modal #modal-box, body.modal #login-box {
+  box-shadow: none;
+}*/
+
+/* will remove the login background box*/
+/*
+body.modal #modal-box.login-box {
+  background-image: none;
+}*/
 
 /**********************************************
 *************  Login Page  ********************
