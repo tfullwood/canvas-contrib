@@ -82,7 +82,10 @@ def main():
 				lookup_failed(user_id)
 				continue
 
-			# find the canvas login_id for the sis_user_id provided
+			# find the canvas id for the login matching the sis_user_id provided. This
+      # id is not the same thing as the login_id in the CSV files. It is an
+      # internal Canvas identifier for that particular username/password.
+      # Inside Canvas, these are called pseudonyms.
 			login_id = lookup_login(logins, user_id)
 
 			# update password on target login
