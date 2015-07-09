@@ -22,7 +22,7 @@ Organization
 
 This collection is organized by top-level subject:
 
-SIS Integration
+SIS_Integration
 ------
 
 This folder holds scripts, utilities, and general information that can help
