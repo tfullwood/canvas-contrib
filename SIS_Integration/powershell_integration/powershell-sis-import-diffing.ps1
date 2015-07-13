@@ -4,14 +4,13 @@ $account_id = "<account_id>"
 $token = "<some_token>" # access_token
 $domain = "<school>.instructure.com"
 $outputZip = "courses1.csv.zip" # name of the zip file to create
-$term_id = "<term_id>" #SIS ID of the term in Canvas
 $diff_id = "<unique value>" #create a unique ID to use diffing, this is what subsequent sis import will compare data against to speed up imports
 
 
 #################################################
 ###### Don't edit anything after this line ######
 #################################################
-$url = "https://$domain/api/v1/accounts/"+$account_id+"/sis_imports.json?import_type=instructure_csv&batch_mode=1&batch_mode_term_id=sis_term_id:$term_id&diffing_data_set_identifier=$diff_id"
+$url = "https://$domain/api/v1/accounts/"+$account_id+"/sis_imports.json?import_type=instructure_csv&diffing_data_set_identifier=$diff_id"
 $headers = @{"Authorization"="Bearer "+$token}
 
 # Just in case $sourceDir doesn't end with a \, add it.
