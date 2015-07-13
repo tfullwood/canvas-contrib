@@ -4,7 +4,7 @@ $account_id = "<account_id>"
 $token = "<some_token>" # access_token
 $domain = "<school>.instructure.com"
 $outputZip = "courses1.csv.zip" # name of the zip file to create
-$term_id = "<term_id>" #SIS ID of the course
+$term_id = "<term_id>" #SIS ID of the term in Canvas
 $diff_id = "<unique value>" #create a unique ID to use diffing, this is what subsequent sis import will compare data against to speed up imports
 
 
