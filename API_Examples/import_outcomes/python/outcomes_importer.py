@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 domain = "<yourdomain>.instructure.com"
-token = "<your_access_token>"
+token = "<token>"
 
 ####################################################################################################
 ####################################################################################################
@@ -15,6 +15,7 @@ import requests,json
 import argparse
 import sys,os
 import csv
+import pprint
 
 
 def get_headers():
@@ -83,8 +84,7 @@ def paginated_outcome_subgroups(parent_group_id):
           vendor_guid_cache['outcome_groups'].setdefault(s['vendor_guid'],s)
           yield s
     if 'next' in response.links:
-      print response.links['next']
-      url = response.links['next']['href']
+      url = response.links['next']['url']
     else:
       all_done = True
 
@@ -104,9 +104,14 @@ def deleteOutcomeGroup(outcome_group_id):
   url = 'https://%s/api/v1/accounts/self/outcome_groups/%d' % (domain,outcome_group_id)
   return requests.delete(url,headers=get_headers())
 
-def getOrCreateOutcomeGroup(outcome_group_vendor_id,name,description,parent_group_id=None):
+def getOrCreateOutcomeGroup(outcome): #outcome_group_vendor_id,name,description,parent_group_id=None):
   parent_group = None
   root_group = getRootOutcomeGroup()
+
+  outcome_group_vendor_id = outcome['outcome_group_vendor_guid']
+  name = outcome['outcome_group_vendor_guid']
+  description = outcome['outcome_group_vendor_guid']
+  parent_group_id = outcome['parent_outcome_group_vendor_guid']
 
   og = vendor_guid_cache['outcome_groups'].get(outcome_group_vendor_id,findOutcomeGroup(outcome_group_vendor_id))
 
@@ -120,16 +125,16 @@ def getOrCreateOutcomeGroup(outcome_group_vendor_id,name,description,parent_grou
       return None
     else:
       # no outcome group was found, create it now
-      og = createOutcomeGroup(outcome_group_vendor_id,name,description,parent_group['id'])
+      og = createOutcomeGroup(outcome,parent_group['id'])
   return og
 
-def createOutcomeGroup(vendor_guid,name,description,parent_id):
+def createOutcomeGroup(outcome,parent_id):
+  vendor_guid = name = description = outcome['outcome_group_vendor_guid']
   url = 'https://%s/api/v1/accounts/self/outcome_groups/%d/subgroups' % (domain,parent_id)
   params = {'title':name,'description':description,'vendor_guid':vendor_guid}
   vendor_guid_cache['outcome_groups'][vendor_guid] = requests.post(url,data=params,headers=get_headers()).json()
   return vendor_guid_cache['outcome_groups'][vendor_guid]
 
-#def getOrCreateOutcome(group_id,title,description,vendor_guid,mastery_points,ratings):
 def getOrCreateOutcome(outcome_to_create):
   if not vendor_guid_cache['outcomes'].get(outcome_to_create['vendor_guid'],None):
     for outcome in paginated_outcomes(outcome_to_create['group_id']):
@@ -197,15 +202,12 @@ if __name__ == '__main__':
           points_description = ['points','description']
           combo = zip(outcome_data.get('rating_levels'),outcome_row[8:])
           outcome['ratings'] = map(lambda x: dict(zip(points_description,x)),combo)
-          og = getOrCreateOutcomeGroup(outcome['outcome_group'],outcome['outcome_group'],outcome['outcome_group'])
+          pprint.pprint(outcome)
+          og = getOrCreateOutcomeGroup(outcome)#['outcome_group'],outcome['outcome_group'],outcome['outcome_group'])
+          outcome['group_id'] = og['id']
           if not og:
             print 'OutcomeGroup not found',outcome['outcome_group']
           else:
             outcome['outcome_group_vendor_id'] = og['id']
-            print 'outcome_to_create',outcome['id']
-            print "Outcome", getOrCreateOutcome(outcome['outcome_group_vendor_id'],
-                outcome['name'],
-                outcome['description'],
-                outcome['id'],
-                outcome['mastery_points'],
-                outcome['ratings'])['url']
+            print 'outcome_to_create',outcome['vendor_guid']
+            print "Outcome", getOrCreateOutcome(outcome)
