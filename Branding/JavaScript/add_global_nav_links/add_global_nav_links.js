@@ -10,7 +10,7 @@ $(document).ready(function() {
 	var link = $('<li/>', { //change the variable to something you understand, or leave as is
 		'id': 'custom_menu_item', //change the name of custom to something that identifies your link, such as toolbox.
 		'class': 'menu-item',
-		html: '<a class="menu-item-title" href="/">Toolbox<span class="menu-item-title-icon"></span></a><div class="menu-item-drop"><table cellspacing="0"><tbody><tr><td class="menu-item-drop-column">'+ //change the name of the link
+		html: '<a class="menu-item-title" href="/">Toolbox<span class="menu-item-title-icon"></span><i class="icon-mini-arrow-down"></i></a><div class="menu-item-drop"><table cellspacing="0"><tbody><tr><td class="menu-item-drop-column">'+ //change the name of the link
 		'<ul class="menu-item-drop-column-list">'+
 		//List items
 		'<li><a href="http://google.com" target="_blank"><span class="name ellipsis">Google</span></a></li>'+
@@ -22,7 +22,7 @@ $(document).ready(function() {
 	var link1 = $('<li/>', { //change the variable to something you understand, or leave as is
 		'id': 'custom_menu_item_1', //change the name of custom to something that identifies your link, such as toolbox.
 		'class': 'menu-item',
-		html: '<a class="menu-item-title" href="/">Link<span class="menu-item-title-icon"></span></a><div class="menu-item-drop"><table cellspacing="0"><tbody><tr><td class="menu-item-drop-column">'+ //change the name of the link
+		html: '<a class="menu-item-title" href="/">Link<span class="menu-item-title-icon"></span><i class="icon-mini-arrow-down"></i></a><div class="menu-item-drop"><table cellspacing="0"><tbody><tr><td class="menu-item-drop-column">'+ //change the name of the link
 		//Title in dropdown menu
 		'<ul class="menu-item-drop-column-list">'+
 		//List items
