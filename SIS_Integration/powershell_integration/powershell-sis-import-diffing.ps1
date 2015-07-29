@@ -1,6 +1,6 @@
 $sourceDir = "c:\some\path\to\CSV\source\" #this is source directory literal path
 $outputPath = "c:\some\path\to\script\output\folder\" #output path for the zip file creation
-$account_id = "<account_id>"
+$account_id = "<account_id>" #root account id from Canvas, usually 1
 $token = "<some_token>" # access_token
 $domain = "<school>.instructure.com"
 $outputZip = "courses1.csv.zip" # name of the zip file to create
