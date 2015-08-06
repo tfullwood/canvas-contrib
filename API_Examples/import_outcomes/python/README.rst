@@ -1,7 +1,9 @@
 Import Outcomes
 ===============
 
-This folder includes a script that reads a CVS file of outcomes into Canvas. 
+This folder includes two scripts that reads a CVS file of outcomes into Canvas. The only
+difference between the two scripts is that one is built to import outcomes into a single
+course whereas the other will import them into the account.
 
 Requirements
 ------------
