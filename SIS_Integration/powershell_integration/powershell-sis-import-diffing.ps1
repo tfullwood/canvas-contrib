@@ -1,14 +1,16 @@
 $sourceDir = "c:\some\path\to\CSV\source\" #this is source directory literal path
 $outputPath = "c:\some\path\to\script\output\folder\" #output path for the zip file creation
-$account_id = "<account_id>" #root account ID of Canvas, usually the number 1
+$account_id = "<account_id>" #root account id from Canvas, usually 1
 $token = "<some_token>" # access_token
 $domain = "<school>.instructure.com"
 $outputZip = "courses1.csv.zip" # name of the zip file to create
+$diff_id = "<unique value>" #create a unique ID to use diffing, this is what subsequent sis import will compare data against to speed up imports
+
 
 #################################################
 ###### Don't edit anything after this line ######
 #################################################
-$url = "https://$domain/api/v1/accounts/"+$account_id+"/sis_imports.json?import_type=instructure_csv"
+$url = "https://$domain/api/v1/accounts/"+$account_id+"/sis_imports.json?import_type=instructure_csv&diffing_data_set_identifier=$diff_id"
 $headers = @{"Authorization"="Bearer "+$token}
 
 # Just in case $sourceDir doesn't end with a \, add it.
