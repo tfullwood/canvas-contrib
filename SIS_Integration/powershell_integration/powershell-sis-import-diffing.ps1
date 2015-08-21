@@ -5,12 +5,13 @@ $token = "<some_token>" # access_token
 $domain = "<school>.instructure.com"
 $outputZip = "courses1.csv.zip" # name of the zip file to create
 $diff_id = "<unique value>" #create a unique ID to use diffing, this is what subsequent sis import will compare data against to speed up imports
+$diff_remaster = "false" # set to true if you need to push a remaster into Canvas, else leave false.
 
 
 #################################################
 ###### Don't edit anything after this line ######
 #################################################
-$url = "https://$domain/api/v1/accounts/"+$account_id+"/sis_imports.json?import_type=instructure_csv&diffing_data_set_identifier=$diff_id"
+$url = "https://$domain/api/v1/accounts/"+$account_id+"/sis_imports.json?import_type=instructure_csv&diffing_data_set_identifier=$diff_id&diffing_remaster_data_set=$diff_remaster"
 $headers = @{"Authorization"="Bearer "+$token}
 
 # Just in case $sourceDir doesn't end with a \, add it.
