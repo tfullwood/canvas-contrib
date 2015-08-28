@@ -1,0 +1,85 @@
+/****************************************************
+******** Remove the login box on login page *********
+****************************************************/
+
+/*removes login box shawdow, used when removing the login box completely.*/
+/*
+body.modal #modal-box, body.modal #login-box {
+  box-shadow: none;
+}*/
+
+/* will remove the login background box*/
+/*
+body.modal #modal-box.login-box {
+  background-image: none;
+}*/
+
+/**********************************************
+*************  Login Page  ********************
+**********************************************/
+/*replace the Canvas logo with your own*/
+body.modal #modal-box.login-box h1 {
+  background-image: url();
+  background-repeat: no-repeat;
+background-position: center center !important;
+margin: 0px auto 0px;
+height: 223px;
+width: 550px;
+background-size: 550px;
+float: none;
+}
+
+/* login image/background */
+#modal-box-inner{
+  background-image: url();
+  background-repeat: no-repeat;
+}
+/* login image/background */
+body.modal #modal-box.login-box {
+background: #FFFFFF; /* Old browsers */
+}
+
+/*resize the login box to your preference and change the color of 'stay signed in'*/
+body.modal #modal-box.login-box {
+  width: 623px;
+  height: 350px;
+ }
+ /* stay signed in area*/
+body.modal #modal-box.login-box .login-options{
+  color: black;
+  text-shadow: none;
+}
+
+/*set this to the same width as your login-box above*/
+#unauthorized_holder {
+    width: 623px;
+}
+
+/*change the color of 'don't know your password' */
+body.modal #modal-box.login-box .forgot_password_link {
+  color: black !important;
+  text-shadow: none;
+}
+
+/*Change the background on the login page only*/
+.modal {
+  background: url() no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/************************************************
+******** Adjust the registration screen *********
+************************************************/
+/* a small logo on the registration screen looks good */
+body.modal #modal-box h2{
+    background-image:url() !important;
+    background-size: 50px;
+}
+/* keep the default background for registration screens */
+#modal-box-inner{
+  background-image: url();
+  background-repeat: no-repeat;
+}
