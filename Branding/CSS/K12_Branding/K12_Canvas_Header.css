@@ -1,0 +1,490 @@
+/**********************************************
+*************  Canvas Header  *****************
+**********************************************/
+
+/* Change the background color and bottom border color to a color that matches your institutions colors.
+This is for the bottom bar, that says courses, grades, calendar, inbox, etc*/
+.canvas-header__primary {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background: #318BE5;
+  border-bottom: 1px solid #318BE5;
+}
+/* Change the background color and bottom border color to a color that matches your institutions colors.
+This is for the top bar, that says Canvas and Institution name*/
+.canvas-header__secondary {
+  height: 48px;
+  background: #28639E;
+}
+
+/* Change the color of the lines inbetween courses, grades, calender, etc*/
+.menu-item {
+  border-right: 1px solid #28639e;
+}
+
+/*replace the canvas logo with your logo */
+#header-logo {
+  background: url("http://www.canvaslms.com/img/logo_instructure.png") no-repeat scroll 0 0 transparent;
+  top: 20px;
+  bottom: 0px;
+  left: 7px;
+  right: 0px;
+  height: 70px;
+  width: 250px;
+  background-size: 250px;
+}
+
+
+/*if you replace the left canvas logo, move a smaller one to the right side of the header. include background-size to ensure it displays correctly on ipads*/
+#header-logo-secondary {
+  background-image: url("");
+background-size: 120px 44px;
+display: block;
+top: 25px;
+height: 44px;
+right: 110px;
+}
+
+/*keeps the width of the unauthorized banner the same size as the login page.*/
+#unauthorized_holder #unauthorized_message {
+  width: 623px;
+}
+
+/*change the color of the "masquerading as" name when masquerading or using student view*/
+#identity .emphasize-name {
+    color: red !important;
+}
+
+
+.list-view > header, .list-view #section-tabs-header {
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+.list-view > ul > li > a, .list-view > nav > ul > li > a {
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 5px 8px 5px 12px;
+}
+
+/**********************************************
+************* Navigation Icons ****************
+**********************************************/
+a.courses::before {
+    background: url(icons/courses_nav.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+
+a.home::before {
+    background: url(icons/home.svg) no-repeat scroll left top / 18px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+    background-size: 22px;
+}
+a.announcements::before {
+    background: url(icons/announcements.svg) no-repeat scroll left center / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.modules::before {
+    background: url(icons/modules.svg) no-repeat scroll left center / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.discussions::before {
+    background: url(icons/discussions.svg) no-repeat scroll left top / 19px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.users::before {
+    background: url(icons/users.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.statistics::before {
+    background: url(icons/statistics.svg) no-repeat scroll left center / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.permissions::before {
+    background: url(icons/permissions.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.assignments::before {
+    background: url(icons/assignments.svg) no-repeat scroll left center / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.quizzes::before {
+    background: url(icons/quizzes.svg) no-repeat scroll left center / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+    background-size: 22px 22px;
+}
+a.grades::before {
+    background: url(icons/grades_nav.svg) no-repeat scroll left center / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+    background-size: 22px 22px;
+}
+a.outcomes::before {
+    background: url(icons/outcomes.svg) no-repeat scroll left center / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.pages::before {
+    background: url(icons/pages.svg) no-repeat scroll left center / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.syllabus::before {
+    background: url(icons/syllabus.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.chat::before {
+    background: url(icons/chat.svg) no-repeat scroll left center / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.files::before {
+    background: url(icons/files.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.people::before {
+    background: url(icons/users.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.conferences::before {
+    background: url(icons/conferences.svg) no-repeat scroll left center / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.collaborations::before {
+    background: url(icons/collaborations.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.settings::before {
+    background: url(icons/settings.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.rubrics::before {
+    background: url(icons/rubrics.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+    background-size: 22px 22px;
+}
+a.grading_standards::before {
+    background: url(icons/grading_standards.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.question_banks::before {
+    background: url(icons/question_banks.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.sub_accounts::before {
+    background: url(icons/sub_accounts.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.faculty_journal::before {
+    background: url(icons/faculty_journal.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.terms::before {
+    background: url(icons/terms.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.authentication::before {
+    background: url(icons/authentication.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.sis_import::before {
+    background: url(icons/sis_import.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+}
+a.admin_tools::before {
+    background: url(icons/admin_tools.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+    background-size: 22px 22px;
+}
+/* Attendance tool, will need to update the context_external_tool number*/
+a.context_external_tool_92::before {
+    background: url(icons/attendance.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+    background-size: 22px 22px;
+}
+/* Chat tool, will need to update the context_external_tool number*/
+a.context_external_tool_135::before {
+    background: url(icons/chat.svg) no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 22px;
+    width: 22px;
+    vertical-align: bottom;
+    padding-left: 6px;
+    background-size: 23px 23px;
+}
+
+
+
+/*********************************************
+*********Navigation Highlight Changes*********
+**********************************************/
+.list-view > ul > li > a:hover, .list-view > nav > ul > li > a:hover {
+    color: #28639E;
+}
+
+.list-view a.active {
+     background: #28639E;
+     color: white;
+}
+.list-view a.active:focus {
+  background-color: #28639E;
+}
+.list-view a.active:hover {
+     background-color:;
+     color: white;
+}
+.list-view a.active::before {
+     color: #28639E;
+}
+.list-view a.active:hover::before {
+     color: white;
+}
+@media screen and (max-width: 1024px) {
+}
+
+.list-view > ul > li, .list-view > nav > ul > li {
+    /*border-bottom: 1px solid black;*/
+    padding: 0;
+}
+
+/**********************************************
+*************  Login Page  ********************
+**********************************************/
+/*replace the Canvas logo with your own*/
+body.modal #modal-box.login-box h1 {
+  background-image: url("http://www.canvaslms.com/img/logo_instructure.png");
+  background-repeat: no-repeat;
+  background-position: center center !important;
+  margin: 0px auto 0px;
+  height: 230px;
+  width: 355px;
+  background-size: 350px;
+  float: none;
+}
+
+/* login image/background */
+#modal-box-inner{
+  background-image: url("");
+  background-repeat: no-repeat;
+}
+/* login image/background */
+body.modal #modal-box.login-box {
+  background: #378de2; /* Old browsers */
+  background: -moz-linear-gradient(top,  #378de2 0%, #2b649c 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#378de2), color-stop(100%,#2b649c)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #378de2 0%,#2b649c 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #378de2 0%,#2b649c 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #378de2 0%,#2b649c 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #378de2 0%,#2b649c 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#378de2', endColorstr='#2b649c',GradientType=0 ); /* IE6-9 */
+}
+
+/*resize the login box to your preference and change the color of 'stay signed in'*/
+body.modal #modal-box.login-box {
+  width: 623px;
+  height: 350px;
+ }
+ /* stay signed in area*/
+body.modal #modal-box.login-box .login-options{
+  color: white;
+  text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+}
+
+/*set this to the same width as your login-box above*/
+#unauthorized_holder {
+    width: 623px;
+}
+
+/*change the color of 'don't know your password' */
+body.modal #modal-box.login-box .forgot_password_link {
+  color: white !important;
+  text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+}
+
+/*change the color of the login button */
+body.modal .btn-primary, body.modal #modal-box .button, body.modal #login-box .button, #login_form .btn-primary {
+  background-color: #E23D35 !important;
+  background-image: none;
+  border-color: #E23D35 !important;
+  /*give the button a nice transition animation from normal to onhover*/
+  -webkit-transition: All 0.3s ease;
+  -moz-transition: All 0.3s ease;
+  -o-transition: All 0.3s ease;
+  -ms-transition: All 0.3s ease;
+  transition: All 0.3s ease;
+}
+/*login button color on hover */
+body.modal .btn-primary:hover, body.modal #modal-box .button:hover, body.modal #login-box .button:hover, #login_form .btn-primary:hover {
+  background-color: #E23D35 !important;
+  background-image: none !important;
+  border-color: #E23D35 !important;
+  }
+
+/*Change the background on the login page only*/
+.modal {
+  background: url("") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/************************************************
+******** Adjust the registration screen *********
+************************************************/
+/* a small logo on the registration screen looks good */
+body.modal #modal-box h2{
+    background-image:url("") !important;
+    background-size: 50px;
+}
+/* keep the default background for registration screens */
+#modal-box-inner{
+  background-image: url("");
+  background-repeat: no-repeat;
+}

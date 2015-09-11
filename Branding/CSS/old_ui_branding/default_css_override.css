@@ -1,0 +1,480 @@
+/**********************************************
+*************  Canvas Header  *****************
+**********************************************/
+
+/* Replace the gray background with something that matches your colors,
+you can even use gradients (google css gradients and you should see a colorzilla option).
+You can use .pngs with alpha transparency.*/
+#header {
+    height: 75px;
+}
+
+#header.no-user
+{
+  min-height: 75px;
+  height: 75px;
+}
+
+
+/*replace the canvas logo with your logo */
+#header-logo {
+  background: url() no-repeat scroll 0 0 transparent;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 70px;
+  width: 250px;
+  background-size: 250px;
+}
+
+
+/*if you replace the left canvas logo, move a smaller one to the right side of the header. include background-size to ensure it displays correctly on ipads*/
+#header-logo-secondary {
+  background-image: url();
+background-size: 120px 44px;
+display: block;
+top: 25px;
+height: 44px;
+right: 110px;
+}
+/*adds a watermark logo in the header box*/
+#header-inner{
+    background: transparent url() no-repeat center top;
+}
+
+/*keeps the width of the unauthorized banner the same size as the login page.*/
+#unauthorized_holder #unauthorized_message {
+  width: 623px;
+}
+
+/*if your logo is bigger, you can scoot the menu to the right with this
+#menu { margin-left: 200px; }
+*/
+
+/*change the color of the menu items (courses & groups etc.). If the text looks fuzzy, remove the text shadow.*/
+.menu-item .menu-item-title, .menu-item .menu-item-no-drop {
+  color: white;
+  text-shadow: none;
+}
+
+
+/*change the identity bar (the area that says "My Name Inbox Settings Logout Help)*/
+#identity {
+  background-image: none;
+  background-color: black;
+}
+
+/*change the color of the identity text
+#identity a {
+  color: white !important;
+  text-shadow: 1px 1px 1px black;
+}*/
+
+/*change the color of the circle around the number of unread inbox messages
+#identity .inbox a .unread-messages-count { background-color: #F2F0DD; }
+#identity #identity-help-container a { color: black; }
+*/
+
+/*change the color of the "masquerading as" name when masquerading or using student view*/
+#identity .emphasize-name {
+    color: red !important;
+}
+/*****************Left Side List Styles (Delete if you are not using images)*********************/
+
+a.courses::before {
+    background: url() no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 20px;
+    width: 26px;
+}
+
+a.home::before {
+    background: url() no-repeat scroll left top / 18px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 16px;
+    width: 24px;
+}
+a.announcements::before {
+    background: url() no-repeat scroll left center / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.modules::before {
+    background: url() no-repeat scroll left center / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.discussions::before {
+    background: url() no-repeat scroll left top / 19px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 30px;
+}
+a.users::before {
+    background: url() no-repeat scroll left top / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 30px;
+}
+a.statistics::before {
+    background: url() no-repeat scroll left center / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.permissions::before {
+    background: url() no-repeat scroll left top / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.assignments::before {
+    background: url() no-repeat scroll left center / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 20px;
+    width: 26px;
+}
+a.quizzes::before {
+    background: url() no-repeat scroll left center / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.grades::before {
+    background: url() no-repeat scroll left center / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.outcomes::before {
+    background: url() no-repeat scroll left center / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.pages::before {
+    background: url() no-repeat scroll left center / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.syllabus::before {
+    background: url() no-repeat scroll left top / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 30px;
+}
+a.chat::before {
+    background: url() no-repeat scroll left center / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.files::before {
+    background: url() no-repeat scroll left top / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.people::before {
+    background: url() no-repeat scroll left top / 22px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.conferences::before {
+    background: url() no-repeat scroll left center / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.collaborations::before {
+    background: url() no-repeat scroll left top / 20px auto transparent;
+    content: "";
+    display: inline-block;
+    height: 18px;
+    width: 26px;
+}
+a.settings::before {
+    background: url() no-repeat scroll left center transparent;
+    content: "";
+    display: inline-block;
+    height: 20px;
+    width: 26px;
+}
+
+/*********************************************
+*********Navigation Highlight Changes*********
+**********************************************/
+/* Change the color of the text, when hovering over for selection*/
+.list-view > ul > li > a:hover, .list-view > nav > ul > li > a:hover {
+    background: #2175A6;
+    color: white;
+}
+/*Change the text on left hand nav, when on the page, remove for default behavior*/
+.list-view > ul > li > a:hover, .list-view > nav > ul > li > a {
+    /*color: #000000;*/
+}
+/* changes the color of the highlight color when selected, or the text of the color when selected*/
+.list-view a.active {
+     background: #2175A6;
+     color: white;
+}
+/* changes the color of the selected text or highlight color when hovering over*/
+.list-view a.active:hover {
+     color: #2175A6;
+}
+.list-view a.active::before {
+     color: #2175A6;
+}
+.list-view a.active:hover::before {
+     color: white;
+}
+@media screen and (max-width: 1024px) {
+}
+
+/**********************************************
+*************  Font Changes  ********************
+**********************************************/
+.list-view > header, .list-view #section-tabs-header {
+    font-family: McLaren, "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+   background: #444444;
+   color: white;
+
+}
+.list-view > ul > li > a, .list-view > nav > ul > li > a {
+    font-family: McLaren, "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 5px 8px 2px 12px;
+}
+
+.list-view > ul > li, .list-view > nav > ul > li {
+    border-bottom: 1px solid #cccccc;
+    padding: 0;
+}
+/****************************************************
+******** Remove the login box on login page *********
+****************************************************/
+
+/*removes login box shawdow, used when removing the login box completely.*/
+/*
+body.modal #modal-box, body.modal #login-box {
+  box-shadow: none;
+}*/
+
+/* will remove the login background box*/
+/*
+body.modal #modal-box.login-box {
+  background-image: none;
+}*/
+
+/**********************************************
+*************  Login Page  ********************
+**********************************************/
+/*replace the Canvas logo with your own*/
+body.modal #modal-box.login-box h1 {
+  background-image: url();
+  background-repeat: no-repeat;
+  background-position: center center !important;
+  margin: 0px auto 0px;
+  height: 230px;
+  width: 300px;
+  background-size: 350px;
+  float: none;
+}
+
+/* login image/background */
+#modal-box-inner{
+  background-image: url();
+  background-repeat: no-repeat;
+}
+/* login image/background */
+body.modal #modal-box.login-box {
+background: #4c4c4c; /* Old browsers */
+background: -moz-linear-gradient(top,  #4c4c4c 0%, #595959 12%, #666666 25%, #474747 39%, #2c2c2c 50%, #000000 51%, #111111 60%, #2b2b2b 76%, #1c1c1c 91%, #131313 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4c4c4c), color-stop(12%,#595959), color-stop(25%,#666666), color-stop(39%,#474747), color-stop(50%,#2c2c2c), color-stop(51%,#000000), color-stop(60%,#111111), color-stop(76%,#2b2b2b), color-stop(91%,#1c1c1c), color-stop(100%,#131313)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#131313 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#131313 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#131313 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2c2c2c 50%,#000000 51%,#111111 60%,#2b2b2b 76%,#1c1c1c 91%,#131313 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=0 ); /* IE6-9 */
+}
+
+/*resize the login box to your preference and change the color of 'stay signed in'*/
+body.modal #modal-box.login-box {
+  width: 623px;
+  height: 350px;
+ }
+ /* stay signed in area*/
+body.modal #modal-box.login-box .login-options{
+  color: white;
+  text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+}
+
+/*set this to the same width as your login-box above*/
+#unauthorized_holder {
+    width: 623px;
+}
+
+/*change the color of 'don't know your password' */
+body.modal #modal-box.login-box .forgot_password_link {
+  color: white !important;
+  text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+}
+
+/*change the color of the login button */
+body.modal .btn-primary, body.modal #modal-box .button, body.modal #login-box .button, #login_form .btn-primary {
+  background-color: #0aaeff !important;
+  background-image: none;
+  border-color: #0aaeff !important;
+  /*give the button a nice transition animation from normal to onhover*/
+  -webkit-transition: All 0.3s ease;
+  -moz-transition: All 0.3s ease;
+  -o-transition: All 0.3s ease;
+  -ms-transition: All 0.3s ease;
+  transition: All 0.3s ease;
+}
+/*login button color on hover */
+body.modal .btn-primary:hover, body.modal #modal-box .button:hover, body.modal #login-box .button:hover, #login_form .btn-primary:hover {
+  background-color: #0a95ff !important;
+  background-image: none !important;
+  border-color: #0a95ff !important;
+  }
+
+/*Change the background on the login page only*/
+.modal {
+  background: url("") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/************************************************
+******** Adjust the registration screen *********
+************************************************/
+/* a small logo on the registration screen looks good */
+body.modal #modal-box h2{
+    background-image:url() !important;
+    background-size: 50px;
+}
+/* keep the default background for registration screens */
+#modal-box-inner{
+  background-image: url();
+  background-repeat: no-repeat;
+}
+
+/**********************************************
+******** Header code to add K12 icons *********
+**********************************************/
+
+/* Scoot menu up to cross identity bar */
+#menu { margin-top: -17px; }
+
+/* increase header size to accomodate icons */
+#header { height: 100px; }
+
+/* K12 icons */
+#courses_menu_item .menu-item-title, #courses_menu_item .menu-item-no-drop {
+  background: url(https://dl.dropboxusercontent.com/u/23195770/K12%20logo%20assets/courses-ll.png) no-repeat center top;
+}
+#grades_menu_item .menu-item-no-drop {
+  background: url(https://dl.dropboxusercontent.com/u/23195770/K12%20logo%20assets/grades-l.png) no-repeat center top;
+}
+#calendar_menu_item .menu-item-no-drop {
+  background: url(https://dl.dropboxusercontent.com/u/23195770/K12%20logo%20assets/calendar-ll.png) no-repeat center top;
+}
+
+/* drops down menu text */
+.menu-item-title, .menu-item-no-drop { line-height: 10; }
+
+/* drops down the menu *dropdown* */
+.menu-item .menu-item-drop { top: 88px; }
+
+/* color of menu text on-hover */
+.menu-item.hover .menu-item-title { color: #D9D9D9 }
+
+/* move Canvas logo down */
+#header-logo-secondary { bottom: 0px;}
+
+/* does a bunch of stuff */
+.menu-item .menu-item-title, .menu-item .menu-item-no-drop {
+  color: black;
+  text-shadow: none;
+  height: 70px;
+  width: 140px;
+  text-align: center;
+  font-size: 14px;
+  left: 90px;
+  border-style:none;
+}
+
+/*****************************************************
+*************  Mobile Login Page  ********************
+*****************************************************/
+
+
+/*change location of image the image URL*/
+body{
+background: url();
+}
+/*update the background URL*/
+#f1_container{
+background: url(https://s3.amazonaws.com/SSL_Assets/hilary/header_logok-12.png) no-repeat center top;
+}
+/*update the image URL*/
+.face{
+background: url(https://s3.amazonaws.com/SSL_Assets/hilary/noisy_blue.png?v1);
+/*resize the border or shadow of the login page*/
+border-radius: 0.3em;
+box-shadow: 0px 4px 10px #999;
+}
+/*resize the border or font weight of the login fields*/
+input{
+background: #f3f3f3;
+border-radius: 5px;
+font-weight: normal;
+}
+/*adjust the border, color, or shadow of the login button*/
+/*button[type=submit]{
+border: none;
+color: #fff;
+text-shadow: 0 -1px 0 #36629b;
+}*/
+.flip-to-back, .flip-to-front{
+text-shadow: 0 1px 0 #fff;
+border: none;
+border-radius: 6px;
+background: #dddddd; /* Old browsers */
+background: -moz-linear-gradient(top, #dddddd 0%, #f3f3f3 50%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(50%,#f3f3f3)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #dddddd 0%,#f3f3f3 50%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #dddddd 0%,#f3f3f3 50%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #dddddd 0%,#f3f3f3 50%); /* IE10+ */
+background: linear-gradient(to bottom, #dddddd 0%,#f3f3f3 50%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddddd', endColorstr='#f3f3f3',GradientType=0 ); /* IE6-9 */
+color: #888;
+}

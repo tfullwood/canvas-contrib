@@ -8,3 +8,6 @@ API_Examples/bulk_set_course_tabs/logs
 local_config.py
 *.zip
 *.log
+.coverage
+DogHouse1.jpg
+API_Examples/import_outcomes/python/coverage_html_report

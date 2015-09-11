@@ -1,6 +1,7 @@
 Canvas Contrib
-======
 
+
+======
 Canvas is a new, open-source LMS by Instructure Inc. It is released under the
 AGPLv3 license for use by anyone interested in learning more about, or using
 learning management systems.
@@ -22,7 +23,7 @@ Organization
 
 This collection is organized by top-level subject:
 
-SIS Integration
+SIS_Integration
 ------
 
 This folder holds scripts, utilities, and general information that can help
@@ -40,3 +41,8 @@ Branding
 
 Branding includes many examples of using javascript and CSS to brand your instance of
 Canvas.  
+
+Plugins
+------
+
+Provides examples of some plugins that can be utilized within Canvas.

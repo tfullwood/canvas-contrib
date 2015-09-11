@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 import csv, requests, json, time
 
 subdomain = '' # Example: 'myschool' in 'myschool.instructure.com
@@ -15,7 +15,7 @@ base_url_login = 'https://' + subdomain + 'instructure.com/api/v1/accounts/self/
 headers = { 'Authorization' : 'Bearer ' + access_token }
 log = open(my_log, 'a')
 
-def lookup_user(user_id):
+def fetch_logins(user_id):
 
 	r = requests.get(base_url_user + user_id + '/logins', headers = headers)
 	logins = json.loads(r.text)
@@ -27,7 +27,7 @@ def lookup_user(user_id):
 			exit
 	return logins
 
-def lookup_login(logins, user_id):
+def lookup_pseudonym(logins, user_id):
 
 	for login in logins:
 		if login['sis_user_id'] == user_id:
@@ -75,18 +75,21 @@ def main():
 			password = str(row[1])
 
 			# look up the user's logins
-			logins = lookup_user(user_id)
+			logins = fetch_logins(user_id)
 
 			# if the lookup failed
 			if not logins:
 				lookup_failed(user_id)
 				continue
 
-			# find the canvas login_id for the sis_user_id provided
-			login_id = lookup_login(logins, user_id)
+      # find the canvas id for the login matching the sis_user_id provided. This
+      # id is not the same thing as the login_id in the CSV files. It is an
+      # internal Canvas identifier for that particular username/password.
+      # Inside Canvas, these are called pseudonyms.
+			pseudonym_id = lookup_pseudonym(logins, user_id)
 
 			# update password on target login
-			update_password(login_id, password, user_id)
+			update_password(pseudonym_id, password, user_id)
 		
 		print 'END OF FILE'
 

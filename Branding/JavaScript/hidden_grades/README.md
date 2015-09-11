@@ -13,7 +13,7 @@ the "Navigation" tab in the course's "Settings" section. Once removed,
 grades will be inaccessible to students. By default, grades will be
 available to all.
 
-Instructure may releas an update to Canvas that will 
+Instructure may releas an update to Canvas that will
 include the ability to hide grades from students. It is recommended that
 institutions wait for this. If, however, the ability to hide
 grades is considered essential in the short run, the included files can
@@ -22,7 +22,7 @@ help form a stop-gap solution.
 Support
 ======
 
-This is an unsupported, community-created project. Keep that in 
+This is an unsupported, community-created project. Keep that in
 mind. Instructure won't be able to help you fix or debug this.
 That said, the community will hopefully help support and keep
 both the script and this documentation up-to-date.
