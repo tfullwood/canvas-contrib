@@ -16,6 +16,7 @@ def url_for(path)
   url   = "https://#{$canvas_domain}/api/v1/#{path}"
   token = "access_token=#{$access_token}"
   return [url, token].join("&") if path.include?("?")
+  
   return [url, token].join("?")
 end
 

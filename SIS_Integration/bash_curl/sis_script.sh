@@ -163,7 +163,8 @@ try:
   print res
 except Exception,e:
   print e,jstring
-END)
+END
+)
   #_log ${temp##*|}
   echo $myresult
 }
