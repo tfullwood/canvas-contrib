@@ -1,0 +1,676 @@
+#app-header .logo a {
+background-image: url(LOGO URL LOGO URL LOGO URL LOGO URL LOGO URL LOGO URL LOGO URL LOGO URL );
+background-size: 300px auto;
+ background-position: center center;
+ background-repeat: no-repeat;
+ margin-top: 20px;
+ width: 350px;
+ height: 80px;
+}
+/*hiding the body until the page loads */
+#home-page {
+  display: none;
+}
+
+/*login Page */
+
+
+
+/*enrollment page */
+.panel.registration-form {
+  background-image: url('icons/gradient.jpg');
+  background-repeat: repeat-x;
+  background-position: top left;
+  background-color: #fff;
+border-radius:5px;
+-moz-border-radius: 5px;
+-webkit-border-radius:5px;
+background-size: contain;
+-moz-background-size:contain;
+-webkit-background-size:contain;
+-webkit-box-shadow: 0px 10px 5px 0px rgba(50, 50, 50, 0.4);
+-moz-box-shadow:    0px 10px 5px 0px rgba(50, 50, 50, 0.4);
+box-shadow:         0px 10px 5px 0px rgba(50, 50, 50, 0.4);
+}
+
+#registration {
+
+
+}
+
+.registration-form {margin-bottom: 40px;}
+
+#main.registration-page {background-color:#fff !important;}
+
+
+.ember-view.form-group {
+padding: 10px;
+display: block;
+clear: both;
+width: 100%;
+max-width: 450px;
+float: none;
+margin-left:auto;
+margin-right:auto;
+height:85px;
+margin-bottom: 15px;
+background: ;
+border-radius:0px 0px 15px 15px;
+background: #f8f8f8; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y4ZjhmOCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQyJSIgc3RvcC1jb2xvcj0iI2U4ZTllYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0iI2U4ZTllYiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkN2Q4ZGEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+background: -moz-linear-gradient(top,  #f8f8f8 0%, #e8e9eb 42%, #e8e9eb 55%, #d7d8da 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(42%,#e8e9eb), color-stop(55%,#e8e9eb), color-stop(100%,#d7d8da)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #f8f8f8 0%,#e8e9eb 42%,#e8e9eb 55%,#d7d8da 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #f8f8f8 0%,#e8e9eb 42%,#e8e9eb 55%,#d7d8da 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #f8f8f8 0%,#e8e9eb 42%,#e8e9eb 55%,#d7d8da 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #f8f8f8 0%,#e8e9eb 42%,#e8e9eb 55%,#d7d8da 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#d7d8da',GradientType=0 ); /* IE6-8 */
+vertical-align: bottom;
+box-shadow: 5px 5px 5px #ccc;
+
+}
+
+
+.ember-view.form-group.checkbox {
+    box-shadow: none;
+
+  background: none;
+}
+
+.panel .registration-form .text-center {font-size: 1.2em;}
+
+.RegistrationForm__TermsOfUse {font-size: 1.2em;}
+
+.ember-view.form-group .form-control {
+
+width:70%;
+float: right;
+position: relative;
+bottom:5px;
+right:10px;
+border-radius:20px;
+-moz-border-radius:20px;
+-webkit-border-radius:20px;
+
+}
+
+.registration-form .btn-default {background-color: #4F9ABF; color: #fff;}
+
+
+.ember-view.form-group label.control-label {
+
+
+}
+
+.ember-view.form-group.checkbox label.control-label {
+
+
+}
+
+.form-group .promotion-code {
+
+
+}
+
+
+
+/*frontpage settings*/
+/* You shouldnt need to modify these settings. They control the header*/
+#product-page #feature {
+    padding-top:0
+}
+
+#app-header {
+    height:80px;
+    padding:0
+}
+
+.header-branding h1.logo {
+    margin-top:0!important
+}
+
+.collegelogo {
+    height:65px;
+    position:relative;
+    left:-10px
+}
+
+.header-branding .logo a {
+    background-image:url(LOGO URL LOGO URL LOGO URL LOGO URL LOGO URL LOGO URL LOGO URL LOGO URL LOGO URL );
+    background-size:auto;
+    width:300px;
+    height:65px;
+    top:0;
+    margin-top:0;
+    margin-bottom:0;
+    position:relative;
+    left:20px;
+}
+
+.hero-region.jumbotron.container .col-sm-6 {text-align: left !important;}
+
+div#registration.col-md-offset-3.col-md-6 {
+    width:80%;
+    margin-left:10%
+}
+
+.ember-view.form-group {
+    position:relative
+}
+
+#registration div.form-group .btn-block {
+    height:75px;
+    max-width:160px;
+    margin-left:auto;
+    margin-right:auto
+}
+
+div#feature-legend {
+    width:410px;
+    margin:auto;
+    padding-top:3px
+}
+
+div#feature-legend a {
+    padding-left:15px
+}
+
+img.feature-legend-image {
+    height:35px
+}
+
+div.user-nav.dropdown {
+    top:-10px
+}
+
+/*this chnages the search bar position and text colors*/
+#search-form.callout-region {
+    background-color:#5bc1da;
+    padding-bottom:5px;
+}
+
+.search-form .search-label {
+    text-transform:uppercase;
+    font-size:16px;
+    width:100%;
+    position:relative;
+    top:-10px
+}
+
+.search-form {
+    height:60px
+}
+
+.search-form .search-box {position: relative; top:-10px;}
+.search-form .search-submit:before {position: relative; top:-10px;}
+
+/*Product Page */
+
+/*this will change the size of the tab text */
+.nav.nav-tabs a{font-size:14px;}
+
+/*this is the box that surrounds the FAQ and T and Cs. It is the one with a blue border on the left*/
+
+#product-page .callout-region {
+    background-color:#0073ac;
+    padding-top:2px;
+    padding-bottom:10px;
+}
+
+#product-page .callout-region h3 {
+    color:#fff
+}
+
+#product-page .callout-region h3.h2 {
+    font-size: 1.2em; font-weight: 300;
+}
+
+#product-page .callout-region .btn-info {
+    background-color:#fff;
+    color:#0073ac
+}
+
+.bs-callout-primary {
+    border-left:#0073ac 5px solid;
+    background-color:#fafafa;
+    padding:5px;
+    margin-top:20px;
+    margin-bottom:20px;
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    border-right:1px solid #ccc
+}
+
+/*these are sime general settings for the buttons (FAQ and TandC) in that blue bordered box*/
+.bs-callout-primary .btn {
+    display:block;
+    text-align:left;
+    margin-bottom:5px;
+    background-color:transparent;
+    border:none;
+    margin-left:20px
+}
+
+.bs-callout-primary .btn span {
+    position:relative;
+    left:-20px
+}
+
+/*This changes to font color of any headings on the product page */
+#product-page .product-details h1,#product-page .product-details h2,#product-page .product-details h3,#product-page .product-details h4 {
+    color:#0073ac
+}
+
+.product-bg .jumbotron {padding-top:10px; padding-bottom:10px;}
+
+
+
+
+/*this controls the height and size of the logo on the product page*/
+.collegelogo {
+    height:65px;
+    position:relative;
+    left:-10px
+}
+
+/*These are the buttons on the product page for FAQ and Terms and Conditions*/
+.btn.tandc {
+    background-image:url(icons/tandc.svg);
+    background-repeat:no-repeat;
+    background-position:0 50%;
+    padding-left:50px;
+    background-size:30px;
+    font-weight:300;
+    font-family:helvetica
+}
+
+.btn.faq {
+    background-image:url(icons/faq.svg);
+    background-repeat:no-repeat;
+    background-position:0 50%;
+    padding-left:50px;
+    background-size:30px;
+    font-weight:300;
+    font-family:helvetica
+}
+
+.btn.tandc:hover {
+    background-image:url(icons/tandc_hover.svg);
+    background-repeat:no-repeat;
+    background-position:0 50%;
+    padding-left:50px;
+    background-size:30px;
+    font-weight:300;
+    font-family:helvetica
+}
+
+.btn.faq:hover {
+    background-image:url(icons/faq_hover.svg);
+    background-repeat:no-repeat;
+    background-position:0 50%;
+    padding-left:50px;
+    background-size:30px;
+    font-weight:300;
+    font-family:helvetica
+}
+
+/*change the base layout of the front/landing page*/
+
+.product-tile.course-tile .product-description, .product-tile.program-tile .product-description{display: none;}
+.product-tile .product-heading {color:#0073AC;}
+/* Carousel base class you dont need to change any of these*/
+.carousel {
+    margin-bottom:0
+}
+
+.carousel-inner {
+    max-width:97%!important;
+    margin:0 auto;
+    background-color:#fff
+}
+
+.hero-unit {
+    padding:0;
+    margin-bottom:0
+}
+
+.carousel .container {
+    position:relative;
+    z-index:9
+}
+
+.carousel-control {
+    height:80px;
+    margin-top:0;
+    font-size:120px;
+    text-shadow:0 1px 1px rgba(0,0,0,.4);
+    background-color:transparent;
+    border:0;
+    z-index:10;
+    color:#fff!important;
+    opacity:1
+}
+
+.carousel .item {
+    min-height:220px
+}
+
+.carousel .item.slide_one {
+    background:none
+}
+
+#highlight_carousel .slide_one .carousel-caption h1 {
+}
+
+#highlight_carousel .slide_one .carousel-caption .lead {
+    border:none
+}
+
+#highlight_carousel .slide_two .carousel-caption .lead {
+    border-top:2px dotted #5f6b69;
+    border-bottom:2px dotted #5f6b69;
+    margin-left:72px;
+    padding-left:10px;
+    margin-top:10px
+}
+
+#highlight_carousel .slide_three .carousel-caption .lead {
+    border-top:2px dotted #5f6b69;
+    border-bottom:2px dotted #5f6b69
+}
+
+.carousel .item.slide_two {
+    background:none
+}
+
+.carousel .item.slide_three {
+    background:none
+}
+
+.carousel img.slide_background {
+    position:absolute;
+    top:0;
+    left:0;
+    min-width:100%;
+    height:435px
+}
+
+.carousel-caption {
+    background-color:transparent;
+    position:relative;
+    padding:0 20px;
+    margin:0 auto
+}
+
+.item-wrap {
+    width:1140px;
+    margin:0 auto
+}
+
+#highlight_carousel .carousel-caption .container {
+    padding-top:30px
+}
+
+#review_carousel .carousel-caption {
+    margin-top:70px
+}
+
+#feature_carousel .carousel-caption {
+    margin-top:70px;
+    max-width:825px
+}
+
+#feature_carousel .carousel-caption h1 {
+    border-bottom:none;
+    font-size:42px;
+    padding-top:50px;
+    margin-left:315px;
+    color:#fff;
+    text-shadow:0 1px 1px rgba(0,0,0,.4)
+}
+
+#highlight_carousel .carousel-caption h1 {
+    border-bottom:none;
+    font-size:32px;
+    color:#fff;
+    text-shadow:0 1px 1px rgba(0,0,0,.4);
+    padding-bottom:10px;
+    font-weight:400;
+    letter-spacing:2px;
+    font-family:arial;
+    font-size:36px;
+    line-height:35px;
+    text-transform:none;
+    margin-top:0
+}
+
+#highlight_carousel .carousel-caption .lead {
+    font-size:14px;
+    line-height:20px;
+    color:#fff;
+    text-shadow:0 1px 1px rgba(0,0,0,.4);
+    border-top:1px solid #5f6b69;
+    border-bottom:1px solid #5f6b69;
+    padding:8px 0;
+    margin-top:5px
+}
+
+#feature_carousel .carousel-caption .lead {
+    padding-top:25px;
+    font-size:18px;
+    margin-left:315px;
+    line-height:1.25;
+    color:#fff;
+    text-shadow:0 1px 1px rgba(0,0,0,.4)
+}
+
+.carousel-caption .btn {
+    margin-top:10px
+}
+
+.carousel-caption {
+    top:0;
+    left:0;
+    text-align:left;
+    width:580px;
+    margin:0
+}
+
+.carousel-inner {
+    width:100%
+}
+
+.carousel-inner img {
+    float:left;
+    margin-right:20px;
+    margin-top:20px
+}
+
+.carousel-control.left {
+    background:no-repeat;
+    width:70px;
+    height:70px;
+    top:118px
+}
+
+.carousel-control.right {
+    background:no-repeat;
+    width:70px;
+    height:70px;
+    top:118px;
+    right:40px
+}
+
+#highlight_carousel .carousel-caption .lead {
+    margin-left:40px!important;
+    border:none!important;
+    margin-top:-8px;
+    margin-bottom:8px
+}
+
+#home-page {
+    background:#14467C
+}
+
+/* These settings change the position and color of the text in the carousel, you shouldn't need to change these settings */
+h3.bannertext {
+    font-size:1.5em;
+
+    text-align:left;
+    text-shadow:none;
+    -moz-text-shadow:none;
+    -webkit-text-shadow:none;
+    font-weight:300
+}
+
+/*this is for the red text span*/
+.bannertext .redsim {
+    color:#940129;
+    font-size: 30px;
+}
+
+/*this is for the white text span*/
+.bannertext .whitesim {
+    color:#333;
+    text-transform:uppercase;
+
+}
+
+.bannertext span {
+    display:block
+}
+
+/*this is for the positioning text to the middle*/
+.caption-middle {
+    margin-left:auto;
+    margin-right:auto
+}
+
+/*this is for the positioning text to the middle*/
+.caption-right {
+    float:right;
+    text-align:left!important;
+    margin-right:15%;
+    top:-10px;
+
+}
+
+.caption-left {
+
+margin-left:10px;
+
+}
+
+/*this is for the positioning text to the left it simply left justifys the text*/
+.caption-left h3 {
+    text-align:left
+}
+
+/*this is for base colors dont need to touch*/
+#highlight_carousel .carousel-caption h1 {
+    color:#84B374
+}
+
+#highlight_carousel .carousel-caption .lead {
+    color:#333
+}
+
+
+/* this is for changing the carousel  images*/
+/*height of the images*/
+.carousel .item {
+    height:300px
+}
+#app-header {
+    height: 110px;
+}
+
+/*Change slide one image*/
+.carousel .item.slide_one {
+    background-image:url();
+    width:100%;
+    background-repeat:no-repeat;
+    margin-left:auto;
+    margin-right:auto;
+    background-position:50% 50%;
+    float:left
+}
+
+/*Change slide one image*/
+.carousel .item.slide_two {
+    background-image:url();
+    width:100%;
+    background-repeat:no-repeat;
+    margin-left:auto;
+    margin-right:auto;
+    background-position:50% 82%;
+    float:left
+}
+
+/*changes the text independently on each slide. Both top and bottom values can be assined*/
+.slide_one_top {}
+.slide_one_bottom {}
+.slide_two_top {}
+.slide_two_bottom {}
+
+
+/*Change slide background image*/
+.carousel-inner {
+    background-image:url(icons/slider_background.jpg);
+    max-width:100%!important
+}
+
+/*use this to change the next and back buttons on the carousel*/
+.carousel-control.left {
+    background-image:url(icons/btn_left.png);
+    background-size:cover
+}
+
+.carousel-control.right {
+    background-image:url(icons/btn_right.png);
+    background-size:cover
+}
+
+  .instructors {
+    width: 33.3333%;
+    padding-left: 20px;
+    float: left;
+  }
+}
+
+.course-details h5 {
+  text-align: right;
+}
+
+.course-details h5 span {
+  display: inline-block;
+  border: 2px solid rgba(0,0,0,.65);
+  padding: 5px;
+
+}
+.course-details h3 {
+  margin-top: 0;
+  font-size: 19px;
+}
+.instructors img {
+  width: 100px;
+  float: left;
+  margin: 0 20px 10px 0;
+}
+
+.instructors h3 {
+  margin-top: 0;
+  font-size: 19px;
+}
+
+.social-media {
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.fb-like iframe {
+  position: relative;
+  top: -5px;
+  left: -20px;
+}
