@@ -7,7 +7,7 @@
 
 /*enrollment page */
 .panel.registration-form {
-  background-image: url('icons/gradient.jpg');
+  background-image: url(icons/gradient.jpg);
   background-repeat: repeat-x;
   background-position: top left;
   background-color: #fff;
