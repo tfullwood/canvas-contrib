@@ -1,6 +1,7 @@
 # Bulk assign avatars to users
 
-This script utilizes Canvas' API to assign an avatar to your users in bulk. It makes a few assumptions though. 
+This script utilizes Canvas' API to assign an avatar to your users in bulk. It
+makes the following assumptions:
 
 1. You have all of the user images hosted somewhere that can be accessed publicly
 2. Each user image is named according to the user it applies to, in a predictable format
