@@ -110,4 +110,8 @@ $(document).ready(function() {
 		$('.icon-resources').css('color', '#0096db');
 
 	});
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> kajigga/master
