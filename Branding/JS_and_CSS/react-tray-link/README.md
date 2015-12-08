@@ -6,14 +6,18 @@ Each object in the array will represent a link on the tray. Use the line below t
 
 ```{key: 'http://www.example.com/your-library', val: 'Library'},```
 
-Only edit the following variables. Do not edit anything after line 8
+Only edit the following variables. Do not edit anything after line 13
 
 ```
 var trayLinks = [
-    {key: 'http://www.example.com/your-library', val: 'Library'},
-    {key: 'http://www.google.com', val: 'Google'},
-    {key: 'http://www.example.com/help-desk', val: 'Help Desk'}
+	{key: 'http://www.example.com/your-library', val: 'Library'},
+	{key: 'http://www.google.com', val: 'Google'},
+	{key: 'http://www.example.com/help-desk', val: 'Help Desk'}
 ];
+
+
+var slide_out_title = "Resources" //Changes the title on the slide out menu
+var global_nav_name = "Resources" //Change the title on the global navigation menu
 
 var footerContent = 'Footer text area. Put whatever you want here.';
 ```
