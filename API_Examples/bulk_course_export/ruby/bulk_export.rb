@@ -11,22 +11,22 @@ require 'unirest'
 require 'csv'
 
 unless access_token
-  "Puts what is your access token?"
+  puts "what is your access token?"
   access_token = gets.chomp
 end
 
 unless domain
-  "Puts what is your Canvas domain?"
+  puts "what is your Canvas domain?"
   domain = gets.chomp
 end
 
 unless input_file
-  "Puts where is your input CSV, listing courses to migrate, located?"
+  puts "where is your input CSV, listing courses to migrate, located?"
   input_file = gets.chomp
 end
 
 unless output_file
-  "Puts where would you like to output your CSV to?"
+  puts "where would you like to output your CSV to?"
   output_file = gets.chomp
 end
 
@@ -64,7 +64,7 @@ CSV.foreach(input_file, {:headers => true}) do |cid|
     export_status = Unirest.get("#{url}/#{job['id']}")
     job = export_status.body
   end
-    
+
   if job["processing_errors"]
     puts "An error occurred exporting this job. \n #{job}"
   end
