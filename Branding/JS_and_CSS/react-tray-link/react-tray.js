@@ -10,7 +10,6 @@ $(document).ready(function() {
 	var global_nav_name = "Resources" //Change the title on the global navigation menu
 
 	var footerContent = 'Footer text area. Put whatever you want here.'; //Changes the text of the bottom on the slide out tray
-	var icon_color = '#0096db' //Changes the color of the folder icon
 	////////////////////////////////////////////////////////////////////////////////
 	//DO NOT EDIT ANYTHING BELOW THIS LINE!
 	////////////////////////////////////////////////////////////////////////////////
@@ -107,7 +106,6 @@ $(document).ready(function() {
 		$('#menu, .menu-item.ic-app-header__menu-list-item a').addClass('ui-state-disabled').attr('disabled', 'disabled');
 		$('#customTrayOverlay').show();
 		$('#custom_nav').css('background-color', '#fff');
-		$('.icon-resources').css('color', icon_color);
 
 	});
 });
