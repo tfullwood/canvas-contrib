@@ -10,7 +10,7 @@ $(document).ready(function() {
 	var global_nav_name = "Resources" //Change the title on the global navigation menu
 
 	var footerContent = 'Footer text area. Put whatever you want here.';
-
+	var icon_color = '#0096db'
 	////////////////////////////////////////////////////////////////////////////////
 	//DO NOT EDIT ANYTHING BELOW THIS LINE!
 	////////////////////////////////////////////////////////////////////////////////
@@ -107,7 +107,7 @@ $(document).ready(function() {
 		$('#menu, .menu-item.ic-app-header__menu-list-item a').addClass('ui-state-disabled').attr('disabled', 'disabled');
 		$('#customTrayOverlay').show();
 		$('#custom_nav').css('background-color', '#fff');
-		$('.icon-resources').css('color', '#0096db');
+		$('.icon-resources').css('color', icon_color);
 
 	});
 });
