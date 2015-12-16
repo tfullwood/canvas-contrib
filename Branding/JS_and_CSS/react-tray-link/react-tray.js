@@ -9,8 +9,8 @@ $(document).ready(function() {
 	var slide_out_title = "Resources" //Changes the title on the slide out menu
 	var global_nav_name = "Resources" //Change the title on the global navigation menu
 
-	var footerContent = 'Footer text area. Put whatever you want here.';
-	var icon_color = '#0096db'
+	var footerContent = 'Footer text area. Put whatever you want here.'; //Changes the text of the bottom on the slide out tray
+	var icon_color = '#0096db' //Changes the color of the folder icon
 	////////////////////////////////////////////////////////////////////////////////
 	//DO NOT EDIT ANYTHING BELOW THIS LINE!
 	////////////////////////////////////////////////////////////////////////////////
