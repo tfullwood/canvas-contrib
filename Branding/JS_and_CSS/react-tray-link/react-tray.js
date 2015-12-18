@@ -108,8 +108,4 @@ $(document).ready(function() {
 		$('#custom_nav').css('background-color', '#fff');
 
 	});
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> kajigga/master

@@ -2,7 +2,6 @@ This majority of this script is a standard Bootstrap Carousel. A few additions h
 
 This script replaces the standard blue gradient horizontal banner with a Bootstrap image carousel.
 
-
 You will need to host your images on a publically available server with an SSL certificate configured. Once the images have been added you'll modifiy the following line with the path to your images.
 ```
 <img src="http://placehold.it/1440x350"> \
