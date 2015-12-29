@@ -12,8 +12,12 @@ After the JavaScript has been added to your instance of Canvas you can use the f
 
 forgot-password-link.js
 
-```https://school.instructure.com/login/canvas?forgot_password=1```
+```
+https://school.instructure.com/login/canvas?forgot_password=1
+```
 
 create-password-link.js
 
-```https://school.instructure.com/login/canvas?create_password=1```
+```
+https://school.instructure.com/login/canvas?create_password=1
+```
