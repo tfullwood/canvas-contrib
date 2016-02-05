@@ -4,7 +4,7 @@
 }
 
 /* Hide "Search the Canvas Guides" */
-#help-dialog-options a[href="http://guides.instructure.com"] {
+#help-dialog-options a[href="https://community.canvaslms.com/community/answers/guides/"] {
   display:none !important;
 }
 
@@ -19,6 +19,6 @@
 }
 
 /* Hide "Request a Feature" */
-#help-dialog-options a[href="http://help.instructure.com/categories/20057816-feature-request-categories"] {
+#help-dialog-options a[href="https://community.canvaslms.com/community/ideas/feature-ideas"] {
   display:none !important;
 }
