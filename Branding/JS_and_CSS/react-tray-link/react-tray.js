@@ -51,7 +51,7 @@ $(document).ready(function() {
 
 	function displayLinks(element, index, array) {
 		displayVals += '<li>';
-		displayVals += '<a href="' + element.key + '">' + element.val + '</a>';
+		displayVals += '<a target="_blank" href="' + element.key + '">' + element.val + '</a>';
 		displayVals += '</li>';
 	}
 
